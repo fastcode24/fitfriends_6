@@ -1,0 +1,35 @@
+# Загрузить изображение для автара или бэкграунда
+POST http://localhost:3000/api/upload/file HTTP/1.1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="photo-1.png"
+Content-Type: image/png
+
+< ../../../public/mock-images/avatars/users/photo-1.png
+--boundary--
+
+###
+
+# Загрузить pdf сертификат
+POST http://localhost:3000/api/upload/file HTTP/1.1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="certificate-1.pdf"
+Content-Type: application/pdf
+
+< ../../../public/mock-images/certificates-and-diplomas/certificate-1.pdf
+--boundary--
+
+# Загрузить видео
+POST http://localhost:3000/api/upload/video HTTP/1.1
+Content-Type: multipart/form-data; boundary=boundary
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjExZjMxN2NjZjk0MjY5YjUzMzg2OGMiLCJlbWFpbCI6ImNvYWNoQGZvdW5kLmxvY2FsIiwicm9sZSI6ItGC0YDQtdC90LXRgCIsIm5hbWUiOiJLZWtzIiwiaXNSZWFkeSI6dHJ1ZSwiaWF0IjoxNzEyNDk3MTE5LCJleHAiOjE3MTI0OTgwMTl9.TVF081HH-s07anWUAdfBkrdA8lphkPdwhKxiSuNQ4lA
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="video.mp4"
+Content-Type: video/mp4
+
+< ../../../public/mock-images/training-video/video.mp4
+--boundary--

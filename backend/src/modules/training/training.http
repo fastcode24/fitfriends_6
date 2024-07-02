@@ -1,0 +1,53 @@
+# Список всех тренировок
+GET http://localhost:3000/api/training HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWZiMjdlYzk3YmM3MGMzYThlMWY0ZmYiLCJlbWFpbCI6InVzZXJAZm91bmQubG9jYWwiLCJyb2xlIjoi0YLRgNC10L3QtdGAIiwibmFtZSI6Iktla3MiLCJhdmF0YXIiOiJwaG90by0yLnBuZyIsImlzUmVhZHkiOnRydWUsImlhdCI6MTcxMTU2NDYzNCwiZXhwIjoxNzExNTY1NTM0fQ.8rQiwS_OYQymbANy4wFX2Yhr_GNYHAAwqS7q-z-edgE
+
+###
+
+# Создать новую тренировку
+POST http://localhost:3000/api/training HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWZiMjdlYzk3YmM3MGMzYThlMWY0ZmYiLCJlbWFpbCI6InVzZXJAZm91bmQubG9jYWwiLCJyb2xlIjoi0YLRgNC10L3QtdGAIiwibmFtZSI6Iktla3MiLCJhdmF0YXIiOiJwaG90by0yLnBuZyIsImlzUmVhZHkiOnRydWUsImlhdCI6MTcxMTU1NzUxNywiZXhwIjoxNzExNTU4NDE3fQ.UjbB-ix71IRQtLT7JLMhfyESh8DxT2lo2sE97geflDs
+
+{
+  "title": "Отдых на пляже",
+  "background": "background.jpg",
+  "level": "новичок",
+  "trainingType": "кроссфит",
+  "trainingTime": "50-80 мин",
+  "price": 1000,
+  "calories": 500,
+  "description": "Прекрасная тренировка на пляже средиземноморья",
+  "gender": "мужской",
+  "video": "video.mp4",
+  "isFeatured": true
+}
+
+###
+
+# Подробная информация о тренировке
+GET http://localhost:3000/api/training/02ef1619-0823-4c95-a66a-84c6cd0abbb4 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWZiMjIyNGRkYmFjNzg5ZDMzMjE0NDciLCJlbWFpbCI6InVzZXJAbm90Zm91bmQubG9jYWwiLCJyb2xlIjoi0L_QvtC70YzQt9C-0LLQsNGC0LXQu9GMIiwibmFtZSI6Iktla3MiLCJhdmF0YXIiOiJwaG90by0xLnBuZyIsImlzUmVhZHkiOmZhbHNlLCJpYXQiOjE3MTE0NzkwNDAsImV4cCI6MTcxMTQ3OTk0MH0.4IdyC3uep0Qr5KY7Ryw2ljuTBx3bPv41q1IL4FjpqAM
+
+###
+
+# Изменить данные тренировки
+PATCH http://localhost:3000/api/training/66041fd195118f3d6ea6b562 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWZiMjIyNGRkYmFjNzg5ZDMzMjE0NDciLCJlbWFpbCI6InVzZXJAbm90Zm91bmQubG9jYWwiLCJyb2xlIjoi0L_QvtC70YzQt9C-0LLQsNGC0LXQu9GMIiwibmFtZSI6Iktla3MiLCJhdmF0YXIiOiJwaG90by0xLnBuZyIsImlzUmVhZHkiOmZhbHNlLCJpYXQiOjE3MTE1NDYzNjYsImV4cCI6MTcxMTU0NzI2Nn0.yBvDoHoEIlR-2AIJkEGFTwNmfAB1OUhVsxMgR5SsEDc
+
+{
+  "title": "Отдых на пляже",
+  "background": "background.jpg",
+  "level": "новичок",
+  "trainingType": "кроссфит",
+  "trainingTime": "50-80 мин",
+  "price": 1000,
+  "calories": 500,
+  "description": "Прекрасная тренировка на пляже средиземноморья",
+  "gender": "мужской",
+  "video": "video.mp4",
+  "isFeatured": true
+}
+
+###

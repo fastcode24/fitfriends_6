@@ -1,0 +1,19 @@
+# Получить баланс пользователя по всем тренировкам
+GET http://localhost:3000/api/balance HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWZiMjIyNGRkYmFjNzg5ZDMzMjE0NDciLCJlbWFpbCI6InVzZXJAbm90Zm91bmQubG9jYWwiLCJyb2xlIjoi0L_QvtC70YzQt9C-0LLQsNGC0LXQu9GMIiwibmFtZSI6Iktla3MiLCJhdmF0YXIiOiJwaG90by0xLnBuZyIsImlzUmVhZHkiOmZhbHNlLCJpYXQiOjE3MTE4MzU0MDYsImV4cCI6MTcxMTgzNjMwNn0.uoz-ko1DpT_iWZlMsuKnmkiawoPvIpVio9HTVvnoB7I
+
+###
+
+# Уменьшить баланс пользователя по тренировке на 1
+PATCH  http://localhost:3000/api/balance/ec998270-3efc-48ee-b3a6-2684ddd278b1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWZiMjIyNGRkYmFjNzg5ZDMzMjE0NDciLCJlbWFpbCI6InVzZXJAbm90Zm91bmQubG9jYWwiLCJyb2xlIjoi0L_QvtC70YzQt9C-0LLQsNGC0LXQu9GMIiwibmFtZSI6Iktla3MiLCJhdmF0YXIiOiJwaG90by0xLnBuZyIsImlzUmVhZHkiOmZhbHNlLCJpYXQiOjE3MTE4MzU0MDYsImV4cCI6MTcxMTgzNjMwNn0.uoz-ko1DpT_iWZlMsuKnmkiawoPvIpVio9HTVvnoB7I
+
+{
+  "trainingId": "ec998270-3efc-48ee-b3a6-2684ddd278b1"
+}
+
+###
+
+
+

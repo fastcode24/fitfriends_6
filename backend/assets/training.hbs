@@ -1,0 +1,57 @@
+<h2>Привет, {{userName}}!</h2>
+<p>У тренера {{coachName}} появилась новая тренировка!</p>
+<div>
+  <h3 class='title'>{{title}}</h3>
+  <p class='text'>{{description}}</p>
+  <ul class='list'>
+    <li class='item'>
+      <div><span>{{gender}}</span></div>
+    </li>
+    <li class='item'>
+      <div><span>{{trainingType}}</span></div>
+    </li>
+    <li class='item'>
+      <div><span>{{trainingTime}}</span></div>
+    </li>
+    <li class='item'>
+      <div><span>{{calories}} ккал</span></div>
+    </li>
+    <li class='item'>
+      <div><span>{{price}} рублей</span></div>
+    </li>
+  </ul>
+
+</div>
+
+<style>
+    h2, h3 {
+        color: #333;
+        font-family: Arial, sans-serif;
+    }
+    p, span {
+        color: #666;
+        font-family: Arial, sans-serif;
+    }
+    .title {
+        color: #444;
+        font-weight: bold;
+    }
+    .list {
+        list-style: none;
+        padding: 0;
+    }
+    .item div {
+        background-color: #eee;
+        color: #333;
+        padding: 5px 10px;
+        border-radius: 5px;
+        display: inline-block;
+        margin-right: 5px;
+        font-size: 0.9em;
+    }
+    .text {
+        font-size: 0.9em;
+        line-height: 1.4;
+        margin-top: 10px;
+    }
+</style>

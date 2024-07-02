@@ -1,0 +1,84 @@
+# Зарегистрироваться как пользователь
+POST http://localhost:3000/api/auth/register-customer HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "customer@fitfriends.local",
+  "name": "Иван",
+  "description": "Описание пользователя текстом",
+  "password": "123456",
+  "gender": "мужской",
+  "birthday": "1989-03-12",
+  "role": "пользователь",
+  "metro": "Пионерская",
+  "avatar": "http://localhost:3000/mock-images/avatars/users/photo-1.png",
+  "background": "http://localhost:3000/mock-images/backgrounds/background.jpg",
+  "level": "новичок",
+  "trainingType": [
+    "йога",
+    "бег"
+  ],
+  "isReady": true,
+  "calories": 3200,
+  "caloriesPerDay": 1000,
+  "trainingTime": "10-30 мин"
+}
+
+###
+
+# Зарегистрироваться как тренер
+POST http://localhost:3000/api/auth/register-coach HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Арина",
+  "email": "coach@fitfriends.local",
+  "password": "123456",
+  "description": "Описание пользователя текстом",
+  "gender": "женский",
+  "birthday": "2000-01-01",
+  "role": "тренер",
+  "metro": "Пионерская",
+  "avatar": "http://localhost:3000/mock-images/avatars/coaches/photo-1.png",
+  "background": "http://localhost:3000/mock-images/backgrounds/background.jpg",
+  "level": "новичок",
+  "trainingType": [
+    "йога",
+    "бег"
+  ],
+  "isReady": true,
+  "certificate": "http://localhost:3000/mock-images/certificates-and-diplomas/certificate-1.pdf",
+  "awards": "Список достижений тренера"
+}
+
+
+###
+
+# Войти в систему
+POST http://localhost:3000/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "customer@fitfriends.local",
+  "password": "123456"
+}
+
+###
+
+# Проверить авторизацию
+GET http://localhost:3000/api/auth/login HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWZkOWJmODEzNjMyYzBiNzUwZTE1NjEiLCJlbWFpbCI6InVzZXJAZmZmb3V1bm5uZGRkZGRkLmxvY2FsIiwicm9sZSI6ItGC0YDQtdC90LXRgCIsIm5hbWUiOiJLZWtzIiwiYXZhdGFyIjoicGhvdG8tMi5wbmciLCJpc1JlYWR5Ijp0cnVlLCJ0b2tlbklkIjoiN2JiOTI0NmQtMGFhYy00OWQ2LTg4YjctYzdiNGUxY2E4NzM2IiwiaWF0IjoxNzExMTIzNTQ0LCJleHAiOjE3MTE3MjgzNDR9.NMXpLWqcgSOdj2YoDg41k22wOO9ZeFNTPz4B_0FsqMs
+
+###
+
+# Получить новую пару токенов (передать refresh token)
+GET http://localhost:3000/api/auth/refresh HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWZkOWJmODEzNjMyYzBiNzUwZTE1NjEiLCJlbWFpbCI6InVzZXJAZmZmb3V1bm5uZGRkZGRkLmxvY2FsIiwicm9sZSI6ItGC0YDQtdC90LXRgCIsIm5hbWUiOiJLZWtzIiwiYXZhdGFyIjoicGhvdG8tMi5wbmciLCJpc1JlYWR5Ijp0cnVlLCJ0b2tlbklkIjoiN2JiOTI0NmQtMGFhYy00OWQ2LTg4YjctYzdiNGUxY2E4NzM2IiwiaWF0IjoxNzExMTIzNTQ0LCJleHAiOjE3MTE3MjgzNDR9.NMXpLWqcgSOdj2YoDg41k22wOO9ZeFNTPz4B_0FsqMs
+
+###
+
+# Выйти из системы (передать refresh token)
+DELETE http://localhost:3000/api/auth/logout HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWZkOWJmODEzNjMyYzBiNzUwZTE1NjEiLCJlbWFpbCI6InVzZXJAZmZmb3V1bm5uZGRkZGRkLmxvY2FsIiwicm9sZSI6ItGC0YDQtdC90LXRgCIsIm5hbWUiOiJLZWtzIiwiYXZhdGFyIjoicGhvdG8tMi5wbmciLCJpc1JlYWR5Ijp0cnVlLCJ0b2tlbklkIjoiN2JiOTI0NmQtMGFhYy00OWQ2LTg4YjctYzdiNGUxY2E4NzM2IiwiaWF0IjoxNzExMTIzNTQ0LCJleHAiOjE3MTE3MjgzNDR9.NMXpLWqcgSOdj2YoDg41k22wOO9ZeFNTPz4B_0FsqMs
+
+###
