@@ -1,0 +1,80 @@
+.user-info-edit__select,
+.custom-select--readonly {
+  display: block;
+  width: 100%;
+}
+
+.custom-select__label-container {
+  margin-bottom: 8px;
+}
+
+.custom-select__container {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.custom-select__button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding-right: 30px;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
+.custom-select__button:disabled {
+  color: #333;
+  opacity: 1;
+}
+
+.custom-select__icon {
+  color: #333;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.result__message {
+  text-align: center;
+}
+
+.custom-input {
+  display: flex;
+  flex-direction: column; /* Убедитесь, что элементы расположены в столбик */
+}
+
+.custom-input__wrapper {
+  display: flex;
+  flex-direction: column; /* Обновлено для размещения ошибки под инпутом */
+}
+
+.error__message {
+  display: block;
+  color: red;
+  font-size: 12px;
+  margin: 0px;
+  padding: 0px;
+  width: 100%; /* Обновлено для полной ширины */
+}
+
+.input-load-avatar__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #ccc; /* Можно настроить цвет и стиль границы */
+  position: relative;
+}
+
+.input-load-avatar__btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

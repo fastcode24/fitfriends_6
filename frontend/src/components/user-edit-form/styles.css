@@ -1,0 +1,41 @@
+.user-info-edit__select,
+.custom-select--readonly {
+  display: block;
+  width: 100%;
+}
+
+.custom-select__label-container {
+  margin-bottom: 8px; /* Добавляем отступ снизу, чтобы отодвинуть от селекта */
+}
+
+.custom-select__container {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.custom-select__button {
+  -webkit-appearance: none; /* Убирает стандартную стрелочку в WebKit-браузерах */
+  -moz-appearance: none; /* Убирает стандартную стрелочку в Firefox */
+  appearance: none; /* Современный способ убрать стрелочку */
+  width: 100%; /* Занимает всю доступную ширину */
+  padding-right: 30px; /* Отступ для стрелочки */
+  box-sizing: border-box; /* Включаем отступы и границы в общую ширину */
+}
+
+.custom-select__button:disabled {
+  color: #333;
+  opacity: 1;
+}
+
+.custom-select__icon {
+  position: absolute;
+  right: 20px; /* Положение иконки внутри контейнера */
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Чтобы иконка не мешала взаимодействию с селектом */
+}
+
+.custom-select__icon svg {
+  fill: currentColor; /* Наследует цвет от родителя */
+}

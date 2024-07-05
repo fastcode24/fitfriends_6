@@ -1,0 +1,65 @@
+.special-for-you__wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.special-for-you__list {
+  display: flex;
+  transition: transform 0.3s ease;
+  will-change: transform;
+  padding: 0;
+  margin: 0;
+}
+
+.special-for-you__list > li {
+  flex: 0 0 calc(100% / 3);
+  box-sizing: border-box;
+  list-style: none;
+}
+
+.special-for-you__list > li {
+  flex: 0 0 calc(100% / 3);
+  box-sizing: border-box;
+  list-style: none;
+}
+
+.popular-trainings__wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.popular-trainings__list {
+  display: flex;
+  transition: transform 0.3s ease;
+  will-change: transform;
+  padding: 0;
+  margin: 0;
+}
+
+.popular-trainings__list > li {
+  flex: 0 0 calc(100% / 4);
+  box-sizing: border-box;
+  list-style: none;
+}
+
+.look-for-company__wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.look-for-company__list {
+  display: flex;
+  transition: transform 0.3s ease;
+  will-change: transform;
+  padding: 0;
+  margin: 0;
+}
+
+.look-for-company__list > li {
+  flex: 0 0 calc(95% / 4);
+  box-sizing: border-box;
+  list-style: none;
+}

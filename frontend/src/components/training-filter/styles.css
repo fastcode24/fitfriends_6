@@ -1,0 +1,36 @@
+.my-training-form__block {
+  margin-left: 7px;
+}
+
+.filter-range__scale-container {
+  position: relative;
+  height: 30px;
+  width: 97.5%;
+}
+
+.filter-range__track {
+  height: 1.4px;
+  background: #ccc;
+  width: 100%;
+  position: absolute;
+  border-radius: 4px;
+}
+
+.filter-range__thumb {
+  background-color: #333;
+  transition: background-color 0.3s;
+  border-radius: 50%;
+  height: 17px;
+  width: 17px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.filter-range__thumb:hover,
+.filter-range__thumb:active {
+  background-color: #ccc;
+}
+
+.my-training-form__block--calories .filter-range__track {
+  height: 1px;
+}

@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "users" ALTER COLUMN "background" DROP NOT NULL,
+ALTER COLUMN "level" DROP NOT NULL,
+ALTER COLUMN "is_ready" DROP NOT NULL;

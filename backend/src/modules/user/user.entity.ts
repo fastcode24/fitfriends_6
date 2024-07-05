@@ -15,8 +15,8 @@ export class UserEntity implements FullUser, Entity<string> {
   public role: UserRole;
   public description?: string;
   public metro: Metro;
-  public background: string;
-  public level: Level;
+  public background?: string;
+  public level?: Level;
   public trainingType: TrainingType[];
   public trainingTime?: TrainingTime;
   public calories?: number;
@@ -25,7 +25,7 @@ export class UserEntity implements FullUser, Entity<string> {
   public awards?: string;
   public friends: string[];
   public subscribers?: string[];
-  public isReady: boolean;
+  public isReady?: boolean;
 
   constructor(user: FullUser) {
     this.populate(user)

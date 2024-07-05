@@ -1,0 +1,51 @@
+.user-info-edit__select,
+.custom-select--readonly {
+  display: block;
+  width: 100%;
+}
+
+.custom-select__label-container {
+  margin-bottom: 8px;
+}
+
+.custom-select__container {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.custom-select__button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding-right: 30px;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
+.custom-select__button:disabled {
+  color: #333;
+  opacity: 1;
+}
+
+.custom-select__icon {
+  color: #333;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.result__message {
+  text-align: center;
+}
+
+.error__message {
+  display: block;
+  color: red;
+  font-size: 12px;
+  margin: 0px;
+  padding: 0px;
+}

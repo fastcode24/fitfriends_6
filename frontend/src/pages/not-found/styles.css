@@ -1,0 +1,8 @@
+.buttons404Container {
+  display: flex;
+  gap: 10px;
+}
+
+.buttons404 {
+  margin: 5px;
+}

@@ -11,10 +11,10 @@ export interface BaseUser {
   role: UserRole;
   description?: string;
   metro: Metro;
-  background: string;
-  level: Level;
+  background?: string;
+  level?: Level;
   trainingType: TrainingType[];
   friends: string[];
   subscribers?: string[];
-  isReady: boolean;
+  isReady?: boolean;
 };

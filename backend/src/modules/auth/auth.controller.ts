@@ -8,7 +8,7 @@ import { UserDtoValidationPipe } from 'src/libs/pipes';
 import { JwtRefreshGuard, LocalAuthGuard, NotAuthGuard } from 'src/libs/guards';
 import { AuthCoachRdo, AuthUserRdo, LoggedUserRdo } from './rdo';
 import { RequestWithRefreshTokenPayload, RequestWithTokenPayload, RequestWithUser } from 'src/libs/requests';
-import { CreateCoachDto, CreateCustomerDto, LoginUserDto } from './dto';
+import { CreateCoachDto, CreateCustomerDto, CreateUserDto, LoginUserDto } from './dto';
 import { FullUserRdo } from '../user/rdo';
 
 @ApiTags('Авторизация')
@@ -30,12 +30,12 @@ export class AuthController {
   })
   @Public()
   @UseGuards(NotAuthGuard)
-  @ApiBody({ type: CreateCustomerDto })
-  @Post('register-customer')
-  public async createCustomer(
+  @ApiBody({ type: CreateUserDto })
+  @Post('register')
+  public async createUser(
     @Body(new UserDtoValidationPipe(CreateCustomerDto)) dto: CreateCustomerDto,
   ) {
-    return this.authService.registerCustomer(dto);
+    return this.authService.registerUser(dto);
   }
 
   @ApiOperation({

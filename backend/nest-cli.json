@@ -5,6 +5,15 @@
   "entryFile": "backend/src/main",
   "compilerOptions": {
     "deleteOutDir": true,
-    "assets": ["src/assets/**/*"]
+    "assets": [
+      {
+        "include": "assets/**/*",
+        "outDir": "dist/backend/assets"
+      },
+      {
+        "include": "public/**/*",
+        "outDir": "dist/backend/public"
+      }
+    ]
   }
 }

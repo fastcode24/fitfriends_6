@@ -2,9 +2,9 @@ import { Controller, HttpStatus, Post, UploadedFile, UseGuards, UseInterceptors 
 import { FileInterceptor } from "@nestjs/platform-express";
 import 'multer';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { Role } from "src/libs/decorators";
+import { Public, Role } from "src/libs/decorators";
 import { UserRole } from "src/libs/types";
-import { RoleGuard } from "src/libs/guards";
+import { NotAuthGuard, RoleGuard } from "src/libs/guards";
 import { UploadRdo } from "./rdo";
 import { FileValidationPipe } from "src/libs/pipes";
 import { FileFilterException } from "src/libs/exceptions";
@@ -36,7 +36,8 @@ export class FileStorageController {
       },
     },
   })
-  @ApiBearerAuth('access-token')
+  @Public()
+  @UseGuards(NotAuthGuard)
   @Post('file')
   @UseInterceptors(
     FileInterceptor('file', {

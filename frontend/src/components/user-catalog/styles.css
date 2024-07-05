@@ -1,0 +1,17 @@
+.user-card-coach__training {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.user-card-coach__training-list {
+  display: flex;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.user-card-coach__training-list > li {
+  flex: 0 0 calc(100% / 4);
+  box-sizing: border-box;
+  list-style: none;
+}

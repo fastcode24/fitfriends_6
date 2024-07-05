@@ -7,8 +7,8 @@ import { UserService } from "src/modules/user/user.service";
 import { RefreshTokenService } from "src/modules/refresh-token/refresh-token.service";
 import { UserEntity } from "src/modules/user/user.entity";
 import { jwtConfig } from "src/libs/config";
-import { CreateCoachDto, CreateCustomerDto, LoginUserDto } from "./dto";
-import { AuthCoachRdo, AuthUserRdo, LoggedUserRdo } from "./rdo";
+import { CreateCoachDto, CreateCustomerDto, CreateUserDto, LoginUserDto } from "./dto";
+import { AuthCoachRdo, AuthUserRdo, CreateUserRdo, LoggedUserRdo } from "./rdo";
 import { createJWTPayload, fillDto } from "src/libs/helpers";
 import { RefreshTokenPayload } from "src/libs/types";
 import { UserMessage } from "src/libs/messages";
@@ -25,58 +25,44 @@ export class AuthService {
     private readonly refreshTokenService: RefreshTokenService,
   ) {}
 
-  public async registerCustomer(dto: CreateCustomerDto): Promise<AuthUserRdo> {
+  public async registerUser(dto: CreateUserDto): Promise<CreateUserRdo> {
     const {
-      email,
       name,
-      description,
+      email,
       password,
-      gender,
+      avatar,
       birthday,
-      role,
       metro,
-      background,
-      level,
-      trainingType,
-      isReady,
-      calories,
-      caloriesPerDay,
-      trainingTime
+      gender,
+      role,
     } = dto;
 
     const existedUser = (await this.userRepository.findByEmail(email));
 
     if (existedUser) {
-      this.logger.warn(`Customer registration failed: ${email} already exists.`);
+      this.logger.warn(`User registration failed: ${email} already exists.`);
       throw new ConflictException(UserMessage.Exists);
     }
 
     const newUser = {
       createdAt: new Date(),
-      email,
       name,
-      description,
-      avatar: '',
+      email,
       password: '',
-      gender,
+      avatar: avatar ? avatar : '',
       birthday: birthday ? dayjs(birthday).toDate() : undefined,
-      role,
       metro,
-      background,
-      level,
-      trainingType,
-      isReady,
+      gender,
+      role,
+      trainingType: [],
       friends: [],
       subscribers: [],
-      calories,
-      caloriesPerDay,
-      trainingTime,
     };
 
     const userEntity = await new UserEntity(newUser).setPassword(password);
     const user = await this.userRepository.save(userEntity);
 
-    return fillDto(AuthUserRdo, user.toPOJO());
+    return fillDto(CreateUserRdo, user.toPOJO());
   }
 
   public async registerCoach(dto: CreateCoachDto): Promise<AuthCoachRdo> {

@@ -25,8 +25,8 @@ model User {
   role           String
   description    String?
   metro          String
-  background     String
-  level          String
+  background     String?
+  level          String?
   trainingType   String[]  @map("training_type")
   trainingTime   String?   @map("training_time")
   calories       Int?
@@ -35,7 +35,7 @@ model User {
   awards         String?
   friends        String[]
   subscribers    String[]
-  isReady        Boolean   @default(false) @map("is_ready")
+  isReady        Boolean?   @default(false) @map("is_ready")
 
   @@map("users")
 }
@@ -139,7 +139,7 @@ model FileStorage {
 }
 
 // npx prisma migrate dev --name "Added model for FileStorage" --schema ./src/libs/models/prisma/schema.prisma --skip-generate
-// npx prisma migrate dev --name "Updated model FileStorage --schema ./src/libs/models/prisma/schema.prisma --skip-generate
+// npx prisma migrate dev --name "Updated model User" --schema ./src/libs/models/prisma/schema.prisma --skip-generate
 // npx prisma format --schema ./src/libs/models/prisma/schema.prisma
 // npx prisma validate --schema ./src/libs/models/prisma/schema.prisma
 // npx prisma migrate dev --schema ./src/libs/models/prisma/schema.prisma --skip-generate --skip-seed

@@ -3,3 +3,5 @@ export enum UserRole {
   Customer = 'пользователь',
   Unknown = 'неизвестно'
 }
+
+export type RegUserRole = Exclude<UserRole, UserRole.Unknown>;
