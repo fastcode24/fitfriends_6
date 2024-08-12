@@ -48,12 +48,11 @@ export function CustomerInfo({ user }: UserProps): JSX.Element {
                         <h2 className="user-card__title">{user.name}</h2>
                       </div>
                       <div className="user-card__label">
-                        <a href="">
-                          <svg className="user-card-coach__icon-location" width="12" height="14" aria-hidden="true">
-                            <use xlinkHref="#icon-location"></use>
-                          </svg>
-                          <span>{user.metro}</span>
-                        </a>
+                        {/*<a href="popup-user-map.html">*/}
+                        <svg className="user-card-coach__icon-location" width="12" height="14" aria-hidden="true">
+                          <use xlinkHref="#icon-location"></use>
+                        </svg>
+                        <span>{user.metro}</span>
                       </div>
                       {user.isReady ?
                         <div className="user-card__status">

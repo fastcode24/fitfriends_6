@@ -71,7 +71,7 @@ async function seedDb(prismaClient: PrismaClient, usersCount: number, trainingsC
         trainingTime: user.trainingTime,
         calories: user.calories,
         caloriesPerDay: user.caloriesPerDay,
-        certificate: user.certificate,
+        certificates: user.certificates,
         awards: user.awards,
         isReady: user.isReady,
       }

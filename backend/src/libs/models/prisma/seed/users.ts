@@ -1,5 +1,6 @@
 import { getRandomEnumValue } from "../../../helpers";
 import { Level, Metro, TrainingTime } from "../../../types";
+import { getRandomCertificates } from "./certificates";
 
 const DEFAULT_PASSWORD = '123456';
 
@@ -21,6 +22,7 @@ export const mockUsers = [
     calories: 3200,
     caloriesPerDay: 1000,
     friends: [],
+    certificates: getRandomCertificates(),
     isReady: true,
   },
   {
@@ -40,6 +42,7 @@ export const mockUsers = [
     calories: 3200,
     caloriesPerDay: 1000,
     friends: [],
+    certificates: getRandomCertificates(),
     isReady: true,
   },
   {
@@ -59,6 +62,7 @@ export const mockUsers = [
     calories: 3200,
     caloriesPerDay: 1000,
     friends: [],
+    certificates: getRandomCertificates(),
     isReady: true,
   },
   {
@@ -78,6 +82,7 @@ export const mockUsers = [
     calories: 3200,
     caloriesPerDay: 1000,
     friends: [],
+    certificates: getRandomCertificates(),
     isReady: false,
   },
   {
@@ -94,7 +99,7 @@ export const mockUsers = [
     level: getRandomEnumValue(Level),
     trainingType: ['бокс', 'кроссфит', 'аэробика'],
     friends: [],
-    certificate: "http://localhost:3000/mock-images/certificates-and-diplomas/certificate-1.pdf",
+    certificates: getRandomCertificates(),
     awards: 'Очень большие достижения бравого тренера',
     isReady: true,
   },

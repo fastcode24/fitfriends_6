@@ -31,7 +31,7 @@ model User {
   trainingTime   String?   @map("training_time")
   calories       Int?
   caloriesPerDay Int?      @map("calories_per_day")
-  certificate    String?
+  certificates   String[]
   awards         String?
   friends        String[]
   subscribers    String[]

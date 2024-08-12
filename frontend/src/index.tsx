@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { App } from './components';
 import { store } from './store';
-import { checkAuthAction } from './store/api-actions/auth/auth-actions';
+import { checkAuthAction } from '@store/api-actions';
 import { ErrorMessage } from './components';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';

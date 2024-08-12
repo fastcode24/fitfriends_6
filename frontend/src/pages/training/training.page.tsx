@@ -31,7 +31,6 @@ export function TrainingPage(): JSX.Element {
 
   useEffect(() => {
     if (hash) {
-      console.log('hash', hash);
       const element = document.querySelector(hash);
       if (element) {
         setTimeout(() => {

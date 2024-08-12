@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { AppRoute, AppTitle } from "../../const";
-import { FullUser, Training } from "../../types";
+import { FullUser, Gender, Training, UserRole } from "../../types";
 import { Header, TrainingCard } from "../";
 import { useState } from "react";
 import './styles.css';
@@ -69,26 +69,36 @@ export function CoachInfo({ user, trainings }: UserProps): JSX.Element {
                           <h2 className="user-card-coach__title">{user.name}</h2>
                         </div>
                         <div className="user-card-coach__label">
-                          <a href="popup-user-map.html">
-                            <svg className="user-card-coach__icon-location" width="12" height="14" aria-hidden="true">
-                              <use xlinkHref="#icon-location"></use>
-                            </svg>
-                            <span>{user.metro}</span>
-                          </a>
+                          {/*<a href="popup-user-map.html">*/}
+                          <svg className="user-card-coach__icon-location" width="12" height="14" aria-hidden="true">
+                            <use xlinkHref="#icon-location"></use>
+                          </svg>
+                          <span>{user.metro}</span>
                         </div>
                         <div className="user-card-coach__status-container">
-                          <div className="user-card-coach__status user-card-coach__status--tag">
-                            <svg className="user-card-coach__icon-cup" width="12" height="13" aria-hidden="true">
-                              <use xlinkHref="#icon-cup"></use>
-                            </svg><span>Тренер</span>
-                          </div>
-                          <div className="user-card-coach__status user-card-coach__status--check"><span>Готов тренировать</span></div>
+                          {user.role === UserRole.Coach &&
+                            <div className="user-card-coach__status user-card-coach__status--tag">
+                              <svg className="user-card-coach__icon-cup" width="12" height="13" aria-hidden="true">
+                                <use xlinkHref="#icon-cup"></use>
+                              </svg><span>Тренер</span>
+                            </div>
+                          }
+                          {user.isReady ?
+                            <div className="user-card-coach__status user-card-coach__status--check">
+                              <span>Готов{user.gender === Gender.Woman ? 'а' : ''} тренировать</span>
+                            </div>
+                          :
+                            <div className="user-card-coach-2__status user-card-coach-2__status--check">
+                              <span>Не готов{user.gender === Gender.Woman ? 'а' : ''} тренировать</span>
+                            </div>
+                          }
                         </div>
                         <div className="user-card-coach__text">{user.description}</div>
                         <button className="btn-flat user-card-coach__sertificate" type="button">
                           <svg width="12" height="13" aria-hidden="true">
                             <use xlinkHref="#icon-teacher"></use>
-                          </svg><span>Посмотреть сертификаты</span>
+                          </svg>
+                          <span>Посмотреть сертификаты</span>
                         </button>
                         <ul className="user-card-coach__hashtag-list">
                           {user.trainingType.map((type) => (
@@ -150,7 +160,12 @@ export function CoachInfo({ user, trainings }: UserProps): JSX.Element {
                         ))}
                       </ul>
                       <form className="user-card-coach__training-form">
-                        <button className="btn user-card-coach__btn-training" type="button">Хочу персональную тренировку</button>
+                        {/*<button
+                          className="btn user-card-coach__btn-training"
+                          type="button"
+                        >
+                          Хочу персональную тренировку
+                        </button>*/}
                         <div className="user-card-coach__training-check">
                           <div className="custom-toggle custom-toggle--checkbox">
                             <label>

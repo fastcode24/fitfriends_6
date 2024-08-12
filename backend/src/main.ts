@@ -3,6 +3,9 @@ import { ConfigService } from '@nestjs/config';
 import { Logger } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { DEFAULT_PORT } from './libs/config';
+
+const GLOBAL_PREFIX = 'api';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,10 +18,9 @@ async function bootstrap() {
     .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }, 'refresh-token')
     .build();
 
-  const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
+  app.setGlobalPrefix(GLOBAL_PREFIX);
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup(globalPrefix, app, document);
+  SwaggerModule.setup(GLOBAL_PREFIX, app, document);
 
   app.enableCors({
     origin: '*',
@@ -27,10 +29,10 @@ async function bootstrap() {
   });
 
   const configService = app.get(ConfigService);
-  const port = configService.get('PORT') || 3000;
+  const port = configService.get('PORT') || DEFAULT_PORT;
 
   await app.listen(port, () => {
-    new Logger('Bootstrap').log(`🚀 Started on http://localhost:${port}/${globalPrefix}`);
+    new Logger('Bootstrap').log(`🚀 Started on http://localhost:${port}/${GLOBAL_PREFIX}`);
   });
 }
 

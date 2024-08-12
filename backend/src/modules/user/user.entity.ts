@@ -21,7 +21,7 @@ export class UserEntity implements FullUser, Entity<string> {
   public trainingTime?: TrainingTime;
   public calories?: number;
   public caloriesPerDay?: number;
-  public certificate?: string;
+  public certificates?: string[];
   public awards?: string;
   public friends: string[];
   public subscribers?: string[];
@@ -50,7 +50,7 @@ export class UserEntity implements FullUser, Entity<string> {
       trainingTime: this.trainingTime,
       calories: this.calories,
       caloriesPerDay: this.caloriesPerDay,
-      certificate: this.certificate,
+      certificates: this.certificates,
       awards: this.awards,
       friends: this.friends,
       subscribers: this.subscribers,
@@ -76,7 +76,7 @@ export class UserEntity implements FullUser, Entity<string> {
     this.trainingTime = data.trainingTime;
     this.calories = data.calories;
     this.caloriesPerDay = data.caloriesPerDay;
-    this.certificate = data.certificate;
+    this.certificates = data.certificates;
     this.awards = data.awards;
     this.friends = data.friends;
     this.subscribers = data.subscribers;

@@ -15,7 +15,7 @@ export interface CustomerUser extends BaseUser {
 };
 
 export interface CoachUser extends BaseUser {
-  certificate?: string;
+  certificates?: string[];
   awards?: string;
 };
 

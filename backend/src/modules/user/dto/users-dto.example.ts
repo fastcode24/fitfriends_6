@@ -15,7 +15,9 @@ export const UsersDdoExample = {
   trainingTime: '50-80 мин',
   calories: 5000,
   caloriesPerDay: 500,
-  certificate: 'certificate.pdf',
+  certificates:  [
+    'certificate-1.pdf',
+  ],
   avards: 'Достижения',
   isReady: true
 };

@@ -1,5 +1,6 @@
 export * from './common';
 export * from './scroll';
+export * from './api/check-token-expired';
 export * from './handlers/handle-arrows';
 export * from './handlers/handle-button-change';
 export * from './handlers/handle-checkbox-change';

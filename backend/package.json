@@ -8,9 +8,6 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "copy-assets": "xcopy /E /I /Y assets dist\\backend\\assets",
-    "copy-public": "xcopy /E /I /Y public dist\\backend\\public",
-    "copy:windows": "npm run copy-assets && npm run copy-public",
     "generate:dev": "npx prisma migrate dev --schema ./src/libs/models/prisma/schema.prisma",
     "generate:prod": "npx prisma migrate deploy --schema ./src/libs/models/prisma/schema.prisma",
     "seed": "ts-node ./src/libs/models/prisma/seed/seed.ts",

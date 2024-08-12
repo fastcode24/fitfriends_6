@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { FullUser, Gender, Level, Metro, TrainingType, UserRole } from "../../types";
+import { FullUser, Gender, Level, Metro, TrainingType, UserRole } from "@types";
+import { updateUserAction } from "@store/api-actions";
+import { useAppDispatch } from "@hooks";
+import { capitalizeFirst } from "@utils";
 import './styles.css';
-import { updateUserAction } from "../../store/api-actions";
-import { useAppDispatch } from "../../hooks";
-import { capitalizeFirst } from "../../utils";
 
 type UserEditFormProps = {
   userInfo: FullUser;
@@ -16,6 +16,7 @@ export function UserEditForm({ userInfo }: UserEditFormProps): JSX.Element {
 
   useEffect(() => {
     console.log('user:', user);
+    console.log('user.avatar:', user.avatar);
   }, [user]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,7 +94,7 @@ export function UserEditForm({ userInfo }: UserEditFormProps): JSX.Element {
           <label>
             <input className="visually-hidden" type="file" name="user-photo-1" accept="image/png, image/jpeg" />
             <span className="input-load-avatar__avatar">
-              <img src={user.avatar} srcSet={`${user.avatar} 2x`} width="98" height="98" alt={`Фото тренера ${user.name}`} />
+              <img src={user.avatar} srcSet={`${user.avatar} 2x`} width="98" height="98" alt={`Фото ${user.name}`} />
             </span>
           </label>
         </div>
@@ -139,11 +140,10 @@ export function UserEditForm({ userInfo }: UserEditFormProps): JSX.Element {
               <textarea
                 name="description"
                 placeholder=""
+                defaultValue={user.description}
                 onChange={handleTextareaChange}
                 disabled={!isEditMode}
-              >
-                {user.description}
-              </textarea>
+              />
             </label>
           </div>
         </div>

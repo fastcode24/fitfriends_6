@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { EditableTrainingData, FullTraining } from "../../types";
-import { formatGender, handleButtonChange, handleInputChange, handleTextareaChange } from "../../utils";
-import { useAppDispatch } from "../../hooks";
-import { updateTrainingAction } from "../../store/api-actions";
-import { FEATURED_DISCOUNT } from "../../const";
+import { EditableTrainingData, FullTraining } from "@types";
+import { formatGender, handleButtonChange, handleInputChange, handleTextareaChange } from "@utils";
+import { useAppDispatch } from "@hooks";
+import { updateTrainingAction } from "@store/api-actions";
+import { AppRoute, FEATURED_DISCOUNT } from "@/const";
+import { Link } from "react-router-dom";
 
 interface FormError {
   title: string | null;
@@ -61,18 +62,20 @@ export function TrainingInfoCoach({ training, isEditMode, setIsEditMode }: Train
     <div className="training-info">
       <h2 className="visually-hidden">Информация о тренировке</h2>
       <div className="training-info__header">
-        <div className="training-info__coach">
-          <div className="training-info__photo">
-            <picture>
-              <source type="image/webp" srcSet={`${training.coachAvatar}, ${training.coachAvatar} 2x`} />
-              <img src={training.coachAvatar} srcSet={`${training.coachAvatar} 2x`} width="64" height="64" alt="Изображение тренера" />
-            </picture>
+        <Link to={`${AppRoute.User}/${training.coachId}`}>
+          <div className="training-info__coach">
+            <div className="training-info__photo">
+              <picture>
+                <source type="image/webp" srcSet={`${training.coachAvatar}, ${training.coachAvatar} 2x`} />
+                <img src={training.coachAvatar} srcSet={`${training.coachAvatar} 2x`} width="64" height="64" alt="Изображение тренера" />
+              </picture>
+            </div>
+            <div className="training-info__coach-info">
+              <span className="training-info__label">Тренер</span>
+              <span className="training-info__name">{training.coachName}</span>
+            </div>
           </div>
-          <div className="training-info__coach-info">
-            <span className="training-info__label">Тренер</span>
-            <span className="training-info__name">{training.coachName}</span>
-          </div>
-        </div>
+        </Link>
         <button
           className="btn-flat btn-flat--light btn-flat--underlined training-info__edit training-info__edit--save"
           type="button"

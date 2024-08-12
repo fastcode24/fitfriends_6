@@ -8,7 +8,7 @@ export class AuthCoachRdo extends UserRdo {
     example: 'Список сертификатов тренера',
   })
   @Expose()
-  public certificate: string;
+  public certificates: string[];
 
   @ApiPropertyOptional({
     description: 'Список достижений',

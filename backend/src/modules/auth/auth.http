@@ -47,7 +47,6 @@ Content-Type: application/json
     "бег"
   ],
   "isReady": true,
-  "certificate": "http://localhost:3000/mock-images/certificates-and-diplomas/certificate-1.pdf",
   "awards": "Список достижений тренера"
 }
 

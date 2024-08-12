@@ -1,10 +1,10 @@
-import { Helmet } from "react-helmet-async";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { AuthorizationStatus } from "../../const";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { getAuthorizationStatus } from "../../store/selectors";
-import { AuthData } from "../../types";
-import { loginAction } from "../../store/api-actions/auth/auth-actions";
+import { Helmet } from "react-helmet-async";
+import { useAppDispatch, useAppSelector } from "@hooks";
+import { AuthorizationStatus } from "@/const";
+import { getAuthorizationStatus } from "@store/selectors";
+import { AuthData } from "@types";
+import { loginAction } from "@store/api-actions";
 
 export function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -27,7 +27,6 @@ export function LoginPage(): JSX.Element {
   const handlePasswordChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setPassword(evt.target.value);
   };
-
 
   return (
     <div className="wrapper">

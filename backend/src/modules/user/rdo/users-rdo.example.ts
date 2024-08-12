@@ -25,7 +25,9 @@ export const UsersRdoExample = {
       trainingTime: '30-50 мин',
       calories: null,
       caloriesPerDay: null,
-      certificate: 'certificate.pdf',
+      certificates: [
+        'certificate-1.pdf',
+      ],
       awards: null
     }
   ],

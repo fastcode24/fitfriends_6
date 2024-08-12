@@ -79,7 +79,7 @@ export class AuthService {
       level,
       trainingType,
       isReady,
-      certificate,
+      certificates,
       awards,
     } = dto;
 
@@ -107,7 +107,7 @@ export class AuthService {
       isReady,
       friends: [],
       subscribers: [],
-      certificate,
+      certificates,
       awards,
     };
 

@@ -50,7 +50,7 @@ export function RelatedTrainingsList({ relatedTrainings }: RelatedTrainingsListP
             style={{ transform: `translateX(-${(currentIndex * 100) / VISIBLE_ITEMS}%)` }}
           >
             {relatedTrainings.map((training) => (
-              <li key={training.id}>
+              <li key={training.id} className="special-for-you__item">
                 <RelatedCard training={training} />
               </li>
             ))}

@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { AppRoute, DEFAULT_ITEMS_LIMIT } from "../../const";
+import { DEFAULT_ITEMS_LIMIT } from "../../const";
 import { GoBack, Header, NoItems, ShowMore, TrainingCard, TrainingFilter } from "../../components";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getCatalogTrainings, getUser } from "../../store/selectors";
@@ -69,7 +69,7 @@ export function TrainingsPage(): JSX.Element {
               <div className="my-training-form">
                 <h2 className="visually-hidden">Мои тренировки Фильтр</h2>
                 <div className="my-training-form__wrapper">
-                  <GoBack url={AppRoute.AccountCoach} />
+                  <GoBack />
                   <h3 className="my-training-form__title">фильтры</h3>
                   <TrainingFilter
                     minPrice={minPrice}

@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Expose } from "class-transformer";
-import { IsEnum, IsString, Length } from "class-validator";
+import { IsArray, IsEnum, IsString, Length } from "class-validator";
 import { DtoValidationMessage } from "src/libs/messages";
 import { BaseAuthDto } from "./base-auth.dto";
 import { UserAwardsLength } from "src/app.const";
@@ -17,11 +17,11 @@ export class CreateCoachDto extends BaseAuthDto {
 
   @ApiProperty({
     description: 'Сертификаты тренера',
-    example: 'certificate.pdf',
+    example: 'certificate-1.pdf, certificate-2.pdf',
   })
-  @IsString()
+  @IsArray()
   @Expose()
-  public certificate: string;
+  public certificates: string[];
 
   @ApiProperty({
     description: 'Список достижений тренера',

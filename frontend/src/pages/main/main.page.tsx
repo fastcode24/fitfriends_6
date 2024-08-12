@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { fetchTrainingsAction, fetchUsersAction } from "../../store/api-actions";
 import { Header, FeaturedTrainingsList, PopularTrainingsList, RelatedTrainingsList } from "../../components";
 import { AppTitle } from "../../const";
-import { ReadyUsersList } from "../../components/main/ready-users-list";
+import { ReadyUsersList } from "@/components/main/ready-users-list";
 
 export function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -23,6 +23,10 @@ export function MainPage(): JSX.Element {
   const FEATURED_ITEMS = 3;
   const POPULAR_ITEMS = 8;
   const USERS_ITEMS = 8
+
+  useEffect(() => {
+    console.log('Main Page loaded');
+  }, []);
 
   useEffect(() => {
     const genderExclude = authUserData && authUserData.gender === Gender.Woman ? Gender.Man : Gender.Woman;

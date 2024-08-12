@@ -14,7 +14,11 @@ export const addToFriendAction = createAsyncThunk<void, { friendId: String }, {
     try {
       await api.post(APIRoute.AddFriend, {friendId});
     } catch (error) {
-      dispatch(setError('Error connection to the server'));
+      if (error instanceof Error) {
+        dispatch(setError(error.message));
+      } else {
+        dispatch(setError(String(error)));
+      }
       throw error;
     }
   },

@@ -1,6 +1,7 @@
-import { PopupBuy } from "..";
-import { FEATURED_DISCOUNT } from "../../const";
-import { FullTraining } from "../../types";
+import { Link } from "react-router-dom";
+import { PopupBuy } from "@components";
+import { AppRoute, FEATURED_DISCOUNT } from "@/const";
+import { FullTraining } from "@types";
 
 type TrainingInfoCustomerProps = {
   training: FullTraining;
@@ -15,32 +16,36 @@ export function TrainingInfoCustomer({ training, isPopupBuyVisible, handlePopupB
     <div className="training-info">
       <h2 className="visually-hidden">Информация о тренировке</h2>
       <div className="training-info__header">
-        <div className="training-info__coach">
-          <div className="training-info__photo">
-            <picture>
-              <source type="image/webp" srcSet={`${training.coachAvatar}, ${training.coachAvatar} 2x`} />
-              <img src={training.coachAvatar} srcSet={`${training.coachAvatar} 2x`} width="64" height="64" alt="Изображение тренера" />
-            </picture>
+        <Link to={`${AppRoute.User}/${training.coachId}`}>
+          <div className="training-info__coach">
+            <div className="training-info__photo">
+              <picture>
+                <source type="image/webp" srcSet={`${training.coachAvatar}, ${training.coachAvatar} 2x`} />
+                <img src={training.coachAvatar} srcSet={`${training.coachAvatar} 2x`} width="64" height="64" alt="Изображение тренера" />
+              </picture>
+            </div>
+            <div className="training-info__coach-info">
+              <span className="training-info__label">Тренер</span>
+              <span className="training-info__name">{training.coachName}</span>
+            </div>
           </div>
-          <div className="training-info__coach-info">
-            <span className="training-info__label">Тренер</span>
-            <span className="training-info__name">{training.coachName}</span>
-          </div>
-        </div>
+        </Link>
       </div>
       <div className="training-info__main-content">
         <form action="#" method="get">
           <div className="training-info__form-wrapper">
             <div className="training-info__info-wrapper">
               <div className="training-info__input training-info__input--training">
-                <label><span className="training-info__label">Название тренировки</span>
+                <label>
+                  <span className="training-info__label">Название тренировки</span>
                   <input type="text" name="training" value={training.title} disabled />
                 </label>
                 <div className="training-info__error">Обязательное поле</div>
               </div>
               <div className="training-info__textarea">
-                <label><span className="training-info__label">Описание тренировки</span>
-                  <textarea name="description" disabled>{training.description}</textarea>
+                <label>
+                  <span className="training-info__label">Описание тренировки</span>
+                  <textarea name="description" defaultValue={training.description} disabled />
                 </label>
               </div>
             </div>
@@ -49,9 +54,10 @@ export function TrainingInfoCustomer({ training, isPopupBuyVisible, handlePopupB
                 <label>
                   <span className="training-info__label">Рейтинг</span>
                   <span className="training-info__rating-icon">
-                  <svg width="18" height="18" aria-hidden="true">
-                    <use xlinkHref="#icon-star"></use>
-                  </svg></span>
+                    <svg width="18" height="18" aria-hidden="true">
+                      <use xlinkHref="#icon-star"></use>
+                    </svg>
+                  </span>
                   <input type="number" name="rating" value={training.rating} disabled />
                 </label>
               </div>

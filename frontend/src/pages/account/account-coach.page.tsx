@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { AppRoute } from "../../const";
-import { Header, UserEditForm } from "../../components";
+import { Header, PdfPreview, UserEditForm } from "../../components";
 import { useAppSelector } from "../../hooks";
 import { getUser } from "../../store/selectors";
 
@@ -42,13 +42,13 @@ export function AccountCoachPage(): JSX.Element {
                         </svg>
                       </div><span className="thumbnail-link__text">Создать тренировку</span>
                     </Link>
-                    <Link to={AppRoute.Friends} className="thumbnail-link thumbnail-link--theme-light">
+                    {/*<Link to={AppRoute.Friends} className="thumbnail-link thumbnail-link--theme-light">
                       <div className="thumbnail-link__icon thumbnail-link__icon--theme-light">
                         <svg width="30" height="26" aria-hidden="true">
                           <use xlinkHref="#icon-friends"></use>
                         </svg>
                       </div><span className="thumbnail-link__text">Мои друзья</span>
-                    </Link>
+                    </Link>*/}
                     <Link to={AppRoute.Orders} className="thumbnail-link thumbnail-link--theme-light">
                       <div className="thumbnail-link__icon thumbnail-link__icon--theme-light">
                         <svg width="30" height="26" aria-hidden="true">
@@ -95,10 +95,7 @@ export function AccountCoachPage(): JSX.Element {
                       <li className="personal-account-coach__item">
                         <div className="certificate-card certificate-card--edit">
                           <div className="certificate-card__image">
-                            <picture>
-                              <source type="image/webp" srcSet="img/content/certificates-and-diplomas/certificate-1.webp, img/content/certificates-and-diplomas/certificate-1@2x.webp 2x" />
-                              <img src="img/content/certificates-and-diplomas/certificate-1.jpg" srcSet="img/content/certificates-and-diplomas/certificate-1@2x.jpg 2x" width="294" height="360" alt="Сертификат - Биомеханика ударов в боксе" />
-                            </picture>
+                            <PdfPreview fileUrl={'http://localhost:3000/Sample.pdf'} />
                           </div>
                           <div className="certificate-card__buttons">
                             <button className="btn-flat btn-flat--underlined certificate-card__button certificate-card__button--edit" type="button">
@@ -129,10 +126,7 @@ export function AccountCoachPage(): JSX.Element {
                       <li className="personal-account-coach__item">
                         <div className="certificate-card">
                           <div className="certificate-card__image">
-                            <picture>
-                              <source type="image/webp" srcSet="img/content/certificates-and-diplomas/certificate-2.webp, img/content/certificates-and-diplomas/certificate-2@2x.webp 2x" />
-                              <img src="img/content/certificates-and-diplomas/certificate-2.jpg" srcSet="img/content/certificates-and-diplomas/certificate-2@2x.jpg 2x" width="294" height="360" alt="Сертификат - Организационно-методическая подготовка и проведение групповых и индивидуальных физкультурно-оздоровительных занятий" />
-                            </picture>
+                            <PdfPreview fileUrl={'http://localhost:3000/mock-images/certificates-and-diplomas/certificate-1.pdf'} />
                           </div>
                           <div className="certificate-card__buttons">
                             <button className="btn-flat btn-flat--underlined certificate-card__button certificate-card__button--edit" type="button">
