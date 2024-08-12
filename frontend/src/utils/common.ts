@@ -82,3 +82,8 @@ export function clearEmptyFields<T>(object: T): Partial<T> {
   }
   return cleanedFilter;
 }
+
+export const removeHostFromUrl = (url: string) => {
+  const urlObject = new URL(url);
+  return urlObject.pathname.slice(1);
+};

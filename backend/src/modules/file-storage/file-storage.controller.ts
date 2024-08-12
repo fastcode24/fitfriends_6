@@ -36,15 +36,17 @@ export class FileStorageController {
       },
     },
   })
-  @Public()
-  @UseGuards(NotAuthGuard)
+  @ApiBearerAuth('access-token')
   @Post('file')
   @UseInterceptors(
     FileInterceptor('file', {
       fileFilter: FileFilterException(FileParams.MimeTypes, FileParams.MaxSize),
     }),
   )
-  public async uploadFile(@UploadedFile(FileValidationPipe) file: Express.Multer.File) {
+  public async uploadFile(
+    @UploadedFile(FileValidationPipe) file: Express.Multer.File
+  ) {
+    console.log(file);
     return this.fileStorageService.saveFile(file);
   }
 

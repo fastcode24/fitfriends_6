@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AppRoute, AppTitle } from "../../const";
 import { FullUser, Gender, Training, UserRole } from "../../types";
 import { Header, TrainingCard } from "../";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './styles.css';
 import { addToFriendAction } from "../../store/api-actions";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -20,6 +20,10 @@ export function CoachInfo({ user, trainings }: UserProps): JSX.Element {
   const [currentTrainingIndex, setCurrentTrainingIndex] = useState<number>(0);
   const TRAINING_VISIBLE_ITEMS = 4;
   const totalTrainingItems = trainings.length;
+
+  useEffect(() => {
+    console.log('authUser.role', authUser.role);
+  }, [])
 
   const handleTrainingNext = () => {
     setCurrentTrainingIndex((prevIndex: number) =>
@@ -166,19 +170,26 @@ export function CoachInfo({ user, trainings }: UserProps): JSX.Element {
                         >
                           Хочу персональную тренировку
                         </button>*/}
-                        <div className="user-card-coach__training-check">
-                          <div className="custom-toggle custom-toggle--checkbox">
-                            <label>
-                              <input type="checkbox" value="user-agreement-1" name="user-agreement" checked />
-                              <span className="custom-toggle__icon">
-                                <svg width="9" height="6" aria-hidden="true">
-                                  <use xlinkHref="#arrow-check"></use>
-                                </svg>
-                              </span>
-                              <span className="custom-toggle__label">Получать уведомление на почту о новой тренировке</span>
-                            </label>
+                        {authUser.role === UserRole.Customer &&
+                          <div className="user-card-coach__training-check">
+                            <div className="custom-toggle custom-toggle--checkbox">
+                              <label>
+                                <input
+                                  type="checkbox"
+                                  value="user-agreement-1"
+                                  name="user-agreement"
+                                  checked
+                                />
+                                <span className="custom-toggle__icon">
+                                  <svg width="9" height="6" aria-hidden="true">
+                                    <use xlinkHref="#arrow-check"></use>
+                                  </svg>
+                                </span>
+                                <span className="custom-toggle__label">Получать уведомление на почту о новой тренировке</span>
+                              </label>
+                            </div>
                           </div>
-                        </div>
+                        }
                       </form>
                     </div>
                   </div>

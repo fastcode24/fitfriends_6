@@ -77,7 +77,7 @@ export function App(): JSX.Element {
             <Route path="/" element={<IntroPage />} />
             <Route path={AppRoute.Login} element={<LoginPage />} />
             <Route path={AppRoute.Register} element={<RegisterPage />} />
-            <Route path={AppRoute.QuestionnaireCustomer} element={<Navigate to={AppRoute.Intro} replace />} />
+            <Route path={AppRoute.QuestionnaireCustomer} element={<QuestionnaireCustomerPage />} />
             <Route path={AppRoute.QuestionnaireCoach} element={<Navigate to={AppRoute.Intro} replace />} />
             <Route path={AppRoute.Main} element={<Navigate to={AppRoute.Intro} replace />} />
             <Route path={AppRoute.AccountCoach} element={<Navigate to={AppRoute.Intro} replace />} />

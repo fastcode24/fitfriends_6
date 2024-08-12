@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { FullUser } from "../../types";
-import { Link } from "react-router-dom";
-import { AppRoute } from "../../const";
-import { UserCard } from "..";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FullUser } from '@types';
+import { AppRoute } from '@/const';
+import { UserCard } from '@components';
+import { handleNext, handlePrevious } from '@utils';
 import './styles.css';
-import { handleNext, handlePrevious } from "../../utils";
 
 interface ReadyUsersListProps {
   readyUsers: FullUser[];

@@ -73,4 +73,11 @@ export class FullUserRdo extends UserRdo {
   })
   @Expose()
   public certificates?: string[];
+
+  @ApiPropertyOptional({
+    description: 'Подписчики',
+    example: '',
+  })
+  @Expose()
+  public subscribers?: string[];
 }

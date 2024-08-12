@@ -33,4 +33,6 @@ export * from './training-filter/training-filter-time';
 export * from './training-filter/training-filter-rating';
 export * from './training-filter/training-filter-calories';
 export * from './training-filter/training-filter-price';
-export * from './pdf-preview/pdf-preview';
+export * from './certificates/pdf-preview';
+export * from './certificates/certificate-card';
+export * from './certificates/certificates';

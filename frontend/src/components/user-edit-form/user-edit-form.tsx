@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FullUser, Gender, Level, Metro, TrainingType, UserRole } from "@types";
 import { updateUserAction } from "@store/api-actions";
 import { useAppDispatch } from "@hooks";
@@ -13,11 +13,6 @@ export function UserEditForm({ userInfo }: UserEditFormProps): JSX.Element {
   const [isEditMode, setEditMode] = useState<boolean>(false);
   const [user, setUser] = useState<FullUser>(userInfo);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    console.log('user:', user);
-    console.log('user.avatar:', user.avatar);
-  }, [user]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -93,9 +88,18 @@ export function UserEditForm({ userInfo }: UserEditFormProps): JSX.Element {
         <div className="input-load-avatar">
           <label>
             <input className="visually-hidden" type="file" name="user-photo-1" accept="image/png, image/jpeg" />
-            <span className="input-load-avatar__avatar">
-              <img src={user.avatar} srcSet={`${user.avatar} 2x`} width="98" height="98" alt={`Фото ${user.name}`} />
-            </span>
+            {user.avatar ?
+              <span className="input-load-avatar__avatar">
+                <img src={user.avatar} srcSet={`${user.avatar} 2x`} width="98" height="98" alt={`Фото ${user.name}`} />
+              </span>
+            :
+              <span className="input-load-avatar__btn">
+                <svg width="20" height="20" aria-hidden="true">
+                  <use xlinkHref="#icon-import"></use>
+                </svg>
+              </span>
+            }
+
           </label>
         </div>
         <div className="user-info-edit__controls">

@@ -83,9 +83,12 @@ export function RegisterPage(): JSX.Element {
     event.preventDefault();
     if (isFormValid) {
       try {
-        const response = await registerUserService(newUser);
-        setResultMessage('Успешная регистрация! Готовлю опросник...');
-        console.log('Успешная регистрация:', response);
+        await registerUserService(newUser);
+        if (newUser.role === UserRole.Customer) {
+          setResultMessage('Успешная регистрация! Готовлю опросник...');
+        } else {
+          setResultMessage('Успешная регистрация!');
+        }
 
         setTimeout(() => {
           if (authorizationStatus !== AuthorizationStatus.Auth) {
@@ -95,6 +98,8 @@ export function RegisterPage(): JSX.Element {
 
           if (newUser.role === UserRole.Customer) {
             navigate(AppRoute.QuestionnaireCustomer);
+          } else {
+            navigate(AppRoute.AccountCoach);
           }
         }, 2000);
       } catch (error) {
@@ -297,7 +302,6 @@ export function RegisterPage(): JSX.Element {
                                   name="role"
                                   value={value}
                                   checked={newUser.role === value}
-                                  disabled={value === UserRole.Coach}
                                 />
                                 <span className="role-btn__icon">
                                   <svg width="12" height="13" aria-hidden="true">

@@ -1,5 +1,5 @@
 import { pdfjs, Document, Page } from 'react-pdf';
-import './styles.css';
+import './pdf-styles.css';
 
 interface PdfPreviewProps {
   fileUrl: string;

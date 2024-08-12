@@ -46,8 +46,7 @@ export class UserController {
   @ApiBearerAuth('access-token')
   @Get('/:id')
   public async show(@Param('id', UUIDValidationPipe) id: string) {
-    const existUser = await this.userService.getUserById(id);
-    return fillDto(FullUserRdo, existUser.toPOJO());
+    return await this.userService.getUserById(id);
   }
 
   @ApiOperation({

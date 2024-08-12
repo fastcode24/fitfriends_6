@@ -5,13 +5,15 @@ import { UserEntity } from './user.entity';
 import { FullUserRdo, UsersRdo } from './rdo';
 import { UpdateUserDtoType } from './dto';
 import { UsersQuery } from './user.query';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
   private readonly logger = new Logger(UserService.name);
 
   constructor(
-    private readonly userRepository: UserRepository
+    private readonly userRepository: UserRepository,
+    private readonly configService: ConfigService,
   ) {}
 
   public async getUserEntity(userId: string): Promise<UserEntity> {
@@ -27,6 +29,15 @@ export class UserService {
 
   public async getAllUsers(query?: UsersQuery): Promise<UsersRdo> {
     const userEntities = await this.userRepository.find(query);
+    const appUrl = this.configService.get<string>('app.appUrl');
+
+    userEntities.entities.forEach((entity) => {
+      if (entity.certificates) {
+        entity.certificates = entity.certificates.map(cert => `${appUrl}/${cert}`);
+      }
+      entity.avatar = entity.avatar && `${appUrl}/${entity.avatar}`;
+      entity.background = entity.background && `${appUrl}/${entity.background}`;
+    });
 
     return fillDto(UsersRdo, {
       ...userEntities,
@@ -36,7 +47,7 @@ export class UserService {
     });
   }
 
-  public async getUserById(id: string) {
+  public async getUserById(id: string): Promise<FullUserRdo> {
     const existUser = await this.userRepository.findById(id);
 
     if (!existUser) {
@@ -44,7 +55,12 @@ export class UserService {
       throw new NotFoundException(`Пользователь с id ${id} не найден`);
     }
 
-    return existUser;
+    const appUrl = this.configService.get<string>('app.appUrl');
+    existUser.certificates = existUser.certificates?.map(cert => `${appUrl}/${cert}`);
+    existUser.avatar = existUser.avatar && `${appUrl}/${existUser.avatar}`;
+    existUser.background = existUser.background && `${appUrl}/${existUser.background}`;
+
+    return fillDto(FullUserRdo, existUser.toPOJO());
   }
 
   public async getUserByEmail(email: string): Promise<FullUserRdo> {
@@ -55,9 +71,12 @@ export class UserService {
       throw new NotFoundException(`Пользователь с email ${email} не найден`);
     }
 
-    const user = fillDto(FullUserRdo, existUser.toPOJO());
+    const appUrl = this.configService.get<string>('app.appUrl');
+    existUser.certificates = existUser.certificates?.map(cert => `${appUrl}/${cert}`);
+    existUser.avatar = existUser.avatar && `${appUrl}/${existUser.avatar}`;
+    existUser.background = existUser.background && `${appUrl}/${existUser.background}`;
 
-    return user;
+    return fillDto(FullUserRdo, existUser.toPOJO());
   }
 
   public async updateUser(userId: string, dto: UpdateUserDtoType): Promise<FullUserRdo> {

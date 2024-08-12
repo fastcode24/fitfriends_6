@@ -8,7 +8,8 @@ import { DEFAULT_PORT } from './libs/config';
 const GLOBAL_PREFIX = 'api';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  //const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { logger: ['error', 'warn', 'log', 'debug', 'verbose'] });
 
   const config = new DocumentBuilder()
     .setTitle('Fit Friends')
@@ -30,9 +31,10 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
   const port = configService.get('PORT') || DEFAULT_PORT;
+  const appUrl = configService.get<string>('APP_URL');
 
   await app.listen(port, () => {
-    new Logger('Bootstrap').log(`🚀 Started on http://localhost:${port}/${GLOBAL_PREFIX}`);
+    new Logger('Bootstrap').log(`🚀 Started on ${appUrl}/${GLOBAL_PREFIX}`);
   });
 }
 

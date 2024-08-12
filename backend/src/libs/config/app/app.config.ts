@@ -2,8 +2,8 @@ import { registerAs } from '@nestjs/config';
 import * as Joi from 'joi';
 
 export const DEFAULT_PORT = 3000;
-const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
 
+const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
 type Environment = (typeof ENVIRONMENTS)[number];
 
 export interface AppConfig {
@@ -11,6 +11,7 @@ export interface AppConfig {
   port: number;
   uploadDirectory: string;
   filesServePath: string;
+  appUrl: string;
 }
 
 const validationSchema = Joi.object({
@@ -20,6 +21,7 @@ const validationSchema = Joi.object({
   port: Joi.number().port().default(DEFAULT_PORT),
   uploadDirectory: Joi.string().required(),
   filesServePath: Joi.string().required(),
+  appUrl: Joi.string().uri().required(),
 });
 
 function validateConfig(config: AppConfig): void {
@@ -35,6 +37,7 @@ function getConfig(): AppConfig {
     port: parseInt(process.env.PORT || `${DEFAULT_PORT}`, 10),
     uploadDirectory: process.env.UPLOAD_DIRECTORY_PATH!,
     filesServePath: process.env.SERVE_ROOT!,
+    appUrl: process.env.APP_URL || `http://localhost:${process.env.PORT || DEFAULT_PORT}/`,
   };
 
   validateConfig(config);
