@@ -18,7 +18,6 @@ export const PdfPreview = ({ fileUrl }: PdfPreviewProps) => {
   return (
     <div className="pdf-container">
       <Document
-        key={fileUrl}
         file={fileUrl}
         options={options}
         className="pdf-canvas"

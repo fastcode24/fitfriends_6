@@ -46,7 +46,6 @@ export class FileStorageController {
   public async uploadFile(
     @UploadedFile(FileValidationPipe) file: Express.Multer.File
   ) {
-    console.log(file);
     return this.fileStorageService.saveFile(file);
   }
 

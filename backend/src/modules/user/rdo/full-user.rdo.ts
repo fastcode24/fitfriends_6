@@ -69,7 +69,7 @@ export class FullUserRdo extends UserRdo {
 
   @ApiPropertyOptional({
     description: 'Сертификат тренера',
-    example: 'certificate-1.pdf, certificate-2.pdf',
+    example: '["http://localhost:3000/mock-images/certificates-and-diplomas/certificate-2.pdf", "http://localhost:3000/mock-images/certificates-and-diplomas/certificate-3.pdf"]',
   })
   @Expose()
   public certificates?: string[];

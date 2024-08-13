@@ -82,7 +82,7 @@ export class TrainingRdo {
 
   @ApiProperty({
     description: 'Видео тренировки',
-    example: 'video.mp4',
+    example: 'https://app.fitriends.click/uploads/2024/08/video.mp4',
   })
   @Expose()
   public video: string;

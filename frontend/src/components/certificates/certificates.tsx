@@ -1,9 +1,10 @@
 import { useAppDispatch } from "@/hooks";
+import { fileUploadService } from "@/services/file-storage-service";
 import { updateUserAction } from "@/store/api-actions";
 import { FullUser } from "@/types";
 import { CertificateCard } from "@components";
 import { handleNext, handlePrevious, removeHostFromUrl } from '@utils';
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 interface CertificatesProps {
   user: FullUser;
@@ -11,15 +12,17 @@ interface CertificatesProps {
 
 export function Certificates({user}: CertificatesProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [certificates, setCertificates] = useState<string[]>(user.certificates || []);
   const VISIBLE_ITEMS = 3;
   const SLIDER_STEP = 1;
-  const totalItems = certificates.length;
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   useEffect(() => {
     setCertificates(user.certificates || []);
   }, [user.certificates]);
+
+  const totalItems = useMemo(() => certificates.length, [certificates]);
 
   const handleCertificateDelete = (url: string) => {
     const updatedCertificates = certificates.filter(cert => cert !== url);
@@ -33,7 +36,39 @@ export function Certificates({user}: CertificatesProps): JSX.Element {
     if (currentIndex >= updatedCertificates.length) {
       setCurrentIndex(Math.max(0, updatedCertificates.length - VISIBLE_ITEMS));
     }
+
+    window.location.reload();
   }
+
+  const handleUploadClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      try {
+        const {path} = await fileUploadService(file);
+        const updatedCertificates = [path, ...certificates];
+        setCertificates(updatedCertificates);
+
+        if (user.id) {
+          const certificatesToSend = [...updatedCertificates].map(cert => removeHostFromUrl(cert));
+          dispatch(updateUserAction({id: user.id, updateData: {certificates: certificatesToSend}}));
+        }
+
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
+
+        window.location.reload();
+      } catch (error) {
+        console.error("Ошибка загрузки файла:", error);
+      }
+    }
+  };
 
   return (
     <div className="personal-account-coach__additional-info">
@@ -42,12 +77,20 @@ export function Certificates({user}: CertificatesProps): JSX.Element {
         <button
           className="btn-flat btn-flat--underlined personal-account-coach__button"
           type="button"
+          onClick={handleUploadClick}
         >
           <svg width="14" height="14" aria-hidden="true">
             <use xlinkHref="#icon-import"></use>
           </svg>
           <span>Загрузить</span>
         </button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          style={{ display: 'none' }}
+          accept="application/pdf"
+          onChange={handleFileChange}
+        />
         <div className="personal-account-coach__controls">
           <button
             className="btn-icon personal-account-coach__control"
@@ -79,6 +122,5 @@ export function Certificates({user}: CertificatesProps): JSX.Element {
         ))}
       </ul>
     </div>
-
   );
 }

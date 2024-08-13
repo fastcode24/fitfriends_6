@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from "react";
 import { AppRoute, AuthorizationStatus } from "@/const";
 import { capitalizeFirst, handleInputChange, handleSelectChange, handleSingleCheckboxChange, validateRegData } from "@utils";
 import { CreateUser, Gender, Metro, UserRole, RegUserRole, AuthData } from "@types";
-import { uploadFileService } from "@services/file-storage-service";
+import { fileUploadService } from "@services/file-storage-service";
 import { registerUserService } from "@services/register-user-service";
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { getAuthorizationStatus } from "@store/selectors";
@@ -56,7 +56,7 @@ export function RegisterPage(): JSX.Element {
 
     if (file) {
       try {
-        const response = await uploadFileService(file);
+        const response = await fileUploadService(file);
         console.log('File uploaded successfully:', response.path);
         setNewUser((prevUser) => ({
           ...prevUser,

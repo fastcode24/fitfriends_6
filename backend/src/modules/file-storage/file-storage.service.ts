@@ -1,11 +1,12 @@
 import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { ConfigType } from '@nestjs/config';
+import { ConfigService, ConfigType } from '@nestjs/config';
 import { join } from 'node:path';
 import { ensureDir } from 'fs-extra';
 import { writeFile } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
 import * as dayjs from 'dayjs';
 import { extension } from 'mime-types';
+import { posix as pathPosix } from 'path';
 import { appConfig } from 'src/libs/config';
 import { fillDto } from 'src/libs/helpers';
 import { UploadRdo } from './rdo';
@@ -39,7 +40,7 @@ export class FileStorageService {
 
   private getSubUploadDirectoryPath(): string {
     const [year, month] = dayjs().format(this.DATE_FORMAT).split(' ');
-    return join('uploads', year, month);
+    return pathPosix.join('uploads', year, month);
   }
 
   private async writeFile(file: Express.Multer.File): Promise<FileStore> {
@@ -51,12 +52,12 @@ export class FileStorageService {
 
       const filePath = this.getDestinationFilePath(fileName);
 
-      await ensureDir(join(uploadDirectoryPath, directory));
+      await ensureDir(pathPosix.join(uploadDirectoryPath, directory));
       await writeFile(filePath, file.buffer);
 
       return {
         fileName,
-        directory: directory.replace(/\\/g, '/'),
+        directory,
         path: filePath.replace(/\\/g, '/'),
       };
     } catch (error) {
@@ -67,11 +68,13 @@ export class FileStorageService {
 
   public async saveFile(file: Express.Multer.File): Promise<UploadRdo> {
     const storedFile = await this.writeFile(file);
+    const filePath = `${this.appOptions.appUrl}/${storedFile.directory}/${storedFile.fileName}`;
+
     const fileEntity = FileUploadEntity.fromObject({
       fileName: storedFile.fileName,
       mimetype: file.mimetype,
       originalName: file.originalname,
-      path: storedFile.path,
+      path: filePath.replace(/\\/g, '/'),
       size: file.size,
     });
 

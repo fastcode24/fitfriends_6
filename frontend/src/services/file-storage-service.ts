@@ -10,7 +10,7 @@ interface FileUploadResponse {
   size: number;
 }
 
-export const uploadFileService = async (file: File): Promise<FileUploadResponse> => {
+export const fileUploadService = async (file: File): Promise<FileUploadResponse> => {
   const formData = new FormData();
   formData.append('file', file);
 

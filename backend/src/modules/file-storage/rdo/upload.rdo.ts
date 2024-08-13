@@ -18,14 +18,14 @@ export class UploadRdo {
 
   @ApiProperty({
     description: 'Имя загруженного файла',
-    example: '3822bc22-3f95-4fac-ac90-4d942dcd0f84.png',
+    example: '4a7c3c01-c33f-41ff-9d65-0b7f8592df23.png',
   })
   @Expose()
   public fileName: string;
 
   @ApiProperty({
     description: 'Путь к файлу',
-    example: 'https://fitfriends.local/images/image.png',
+    example: 'https://app.fitriends.click/uploads/2024/08/4a7c3c01-c33f-41ff-9d65-0b7f8592df23.png',
   })
   @Expose()
   public path: string;

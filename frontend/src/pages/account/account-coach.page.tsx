@@ -47,13 +47,13 @@ export function AccountCoachPage(): JSX.Element {
                         </svg>
                       </div><span className="thumbnail-link__text">Создать тренировку</span>
                     </Link>
-                    {/*<Link to={AppRoute.Friends} className="thumbnail-link thumbnail-link--theme-light">
+                    <Link to={AppRoute.Friends} className="thumbnail-link thumbnail-link--theme-light">
                       <div className="thumbnail-link__icon thumbnail-link__icon--theme-light">
                         <svg width="30" height="26" aria-hidden="true">
                           <use xlinkHref="#icon-friends"></use>
                         </svg>
                       </div><span className="thumbnail-link__text">Мои друзья</span>
-                    </Link>*/}
+                    </Link>
                     <Link to={AppRoute.Orders} className="thumbnail-link thumbnail-link--theme-light">
                       <div className="thumbnail-link__icon thumbnail-link__icon--theme-light">
                         <svg width="30" height="26" aria-hidden="true">

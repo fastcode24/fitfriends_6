@@ -21,12 +21,13 @@ export const UsersRdoExample = {
       birthday: null,
       email: 'evgeniya@local.mail',
       description: 'Я - Женя, и я буду балериной через 3 месяца.',
-      background: '/public/images/evgeniya.jpg',
+      background: 'https://fitfriends.click/uploads/2024/08/evgeniya.jpg',
       trainingTime: '30-50 мин',
       calories: null,
       caloriesPerDay: null,
       certificates: [
-        'certificate-1.pdf',
+        "https://fitfriends.click/uploads/2024/08/certificate-2.pdf",
+        "https://fitfriends.click/uploads/2024/08/certificate-3.pdf"
       ],
       awards: null
     }
