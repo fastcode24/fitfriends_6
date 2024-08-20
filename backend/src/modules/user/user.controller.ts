@@ -9,7 +9,6 @@ import { UserDtoValidationPipe } from 'src/libs/pipes';
 import { UUIDValidationPipe } from 'src/libs/pipes/uuid-validation.pipe';
 import { UsersQuery } from './user.query';
 import { RoleGuard } from 'src/libs/guards';
-import { fillDto } from 'src/libs/helpers';
 
 @ApiTags('Пользователи')
 @Controller('users')
