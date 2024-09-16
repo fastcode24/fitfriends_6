@@ -5,7 +5,7 @@ import { FullUser, Gender, Training, UserRole } from "../../types";
 import { Header, PopupMap, TrainingCard } from "../";
 import { useEffect, useState } from "react";
 import './styles.css';
-import { addToFriendAction, checkFriendAction, removeFromFriendAction, subscribeCoachAction, unsubscribeCoachAction } from "../../store/api-actions";
+import { addToFriendAction, checkFriendAction, createBookingAction, removeFromFriendAction, subscribeCoachAction, unsubscribeCoachAction } from "../../store/api-actions";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getAuthUser, getFriendsStatus } from "../../store/selectors";
 
@@ -89,6 +89,12 @@ export function CoachInfo({ user, trainings }: UserProps): JSX.Element {
       }
 
       setIsSubscribeChecked(false);
+    }
+  }
+
+  const handleCreateBooking = () => {
+    if (user.id) {
+      dispatch(createBookingAction({ recipientId: user.id }));
     }
   }
 
@@ -214,6 +220,7 @@ export function CoachInfo({ user, trainings }: UserProps): JSX.Element {
                             <button
                               className="btn user-card-coach__btn-training"
                               type="button"
+                              onClick={handleCreateBooking}
                             >
                               Хочу персональную тренировку
                             </button>

@@ -19,27 +19,15 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
     let isTokenExpired = false;
     if (accessToken) {
       isTokenExpired = checkTokenExpired(accessToken);
-    } else {
-      console.log('accessToken не найден');
     }
 
     if (accessToken && isTokenExpired) {
-      console.log('Токен есть, но просрочен:', isTokenExpired);
       const refreshToken = getRefreshToken();
-      if (refreshToken) {
-        console.log('Нашли refreshToken');
-      }
       const isRefreshExpired = checkTokenExpired(refreshToken);
-      if (isRefreshExpired) {
-        console.log('refreshToken просрочен');
-      }
       if (refreshToken && !isRefreshExpired) {
-        console.log('Пытаюсь перевыпустить accessToken')
         try {
           accessToken = await refreshAccessTokenService(api, refreshToken);
-          console.log('Перевыпустил accessToken:', accessToken);
         } catch {
-          console.log('Не смог перевыпустить accessToken');
           clearTokens();
           dispatch(clearUserData());
           dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
@@ -54,7 +42,6 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
     }
 
     if (accessToken) {
-      console.log('Вижу, что токен есть:', accessToken);
       api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
       try {
         const {data} = await api.get<FullUser>(APIRoute.Login);
@@ -63,7 +50,6 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
         if (id) {
           dispatch(requireAuthorization(AuthorizationStatus.Auth));
           dispatch(setAuthUser({id, email, role}));
-          console.log('Авторизирован с ролью:', role);
         } else {
           throw new Error('id or role is missing');
         }

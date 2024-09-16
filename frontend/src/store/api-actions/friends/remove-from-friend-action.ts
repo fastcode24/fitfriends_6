@@ -19,7 +19,6 @@ export const removeFromFriendAction = createAsyncThunk<void, { friendId: String 
       } else {
         dispatch(setError(String(error)));
       }
-      throw error;
     }
   },
 );

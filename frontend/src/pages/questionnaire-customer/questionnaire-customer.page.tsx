@@ -87,9 +87,6 @@ export function QuestionnaireCustomerPage(): JSX.Element {
 
   useEffect(() => {
     validateAndSetForm();
-    console.log('questionnaire:', questionnaire);
-    console.log('errors:', error);
-    console.log('authUserId:', authUserId);
   }, [questionnaire]);
 
   return (

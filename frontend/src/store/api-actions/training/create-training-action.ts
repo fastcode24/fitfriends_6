@@ -14,7 +14,6 @@ export const createTrainingAction = createAsyncThunk<void, Training, {
   async (body, { dispatch, extra: api }) => {
     try {
       const {data} = await api.post(`${APIRoute.Training}`, body);
-      console.log(data);
     } catch (error) {
       dispatch(setError('Error connection to the server'));
       throw error;

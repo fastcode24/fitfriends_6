@@ -29,11 +29,6 @@ export function UsersPage(): JSX.Element {
   });
 
   useEffect(() => {
-    console.log('users');
-    console.log(users);
-  }, []);
-
-  useEffect(() => {
     const params = removeNullFields<UsersFilterParams>(filter);
     dispatch(fetchUsersAction(params));
   }, [dispatch, filter, visibleItems]);

@@ -24,11 +24,6 @@ export function MainPage(): JSX.Element {
   const USERS_ITEMS = 8
 
   useEffect(() => {
-    console.log('featuredTrainings');
-    console.log('featuredTrainings', featuredTrainings);
-  }, []);
-
-  useEffect(() => {
     const genderExclude = authUserData && authUserData.gender === Gender.Woman ? Gender.Man : Gender.Woman;
     if (authUserData && authUserData.id && authUserData.trainingTime) {
       dispatch(fetchTrainingsAction({

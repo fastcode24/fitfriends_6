@@ -15,7 +15,6 @@ export const fetchUsersAction = createAsyncThunk<void, UsersFilterParams, {
   'data/fetchUsers',
   async (params, {dispatch, extra: api}) => {
     dispatch(loadUsers({isLoading: true, data: null}));
-    console.log('params:', params);
 
     const queryString = buildQueryString<UsersFilterParams>(params);
 

@@ -14,7 +14,6 @@ export const createReviewAction = createAsyncThunk<void, Review, {
   async (body, { dispatch, extra: api }) => {
     try {
       const {data} = await api.post<Review>(`${APIRoute.Review}`, body);
-      console.log(data);
     } catch (error) {
       dispatch(setError('Error connection to the server'));
       throw error;

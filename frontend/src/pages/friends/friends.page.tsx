@@ -21,11 +21,6 @@ export function FriendsPage(): JSX.Element {
     setVisibleUsers((prev) => prev + INITIAL_VISIBLE_USERS);
   };
 
-  useEffect(() => {
-    console.log('friends.length', friends.length);
-    console.log('visibleUsers', visibleUsers);
-  }, [friends]);
-
   return (
     <div className="wrapper">
       <Helmet>

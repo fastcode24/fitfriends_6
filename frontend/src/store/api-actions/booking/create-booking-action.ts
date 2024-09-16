@@ -3,17 +3,17 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../../state';
 import { APIRoute } from '../../../const';
 
-export const subscribeCoachAction = createAsyncThunk<void, { coachId: String }, {
+export const createBookingAction = createAsyncThunk<void, { recipientId: String }, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/subscribeCoach',
-  async ({ coachId }, { extra: api, rejectWithValue }) => {
+  'data/createBooking',
+  async ({ recipientId }, { extra: api, rejectWithValue }) => {
     try {
-      await api.post(`${APIRoute.Subscribe}/${coachId}`);
+      await api.post(APIRoute.AddFriend, {recipientId});
     } catch (error) {
       return rejectWithValue('An error occurred while subscribing');
     }
-  }
+  },
 );

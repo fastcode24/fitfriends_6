@@ -14,7 +14,6 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   'user/login',
   async ({email, password}, {dispatch, extra: api}) => {
     const result = await api.post<UserData>(APIRoute.Login, {email, password});
-    console.log(result);
     const {data: {accessToken, refreshToken, id, role}} = await api.post<UserData>(APIRoute.Login, {email, password});
 
     if (accessToken) {
@@ -27,6 +26,5 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(setAuthUser({id, email, role}));
-    console.log('Авторизирован с ролью:', role);
   },
 );

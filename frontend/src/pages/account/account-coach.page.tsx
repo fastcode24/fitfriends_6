@@ -13,10 +13,6 @@ export function AccountCoachPage(): JSX.Element {
     return <div>Loading user data...</div>;
   }
 
-  useEffect(() => {
-    console.log(user);
-  }, [user])
-
   return (
     <div className="wrapper">
       <Helmet>

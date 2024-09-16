@@ -57,7 +57,6 @@ export function RegisterPage(): JSX.Element {
     if (file) {
       try {
         const response = await fileUploadService(file);
-        console.log('File uploaded successfully:', response.path);
         setNewUser((prevUser) => ({
           ...prevUser,
           avatar: response.path

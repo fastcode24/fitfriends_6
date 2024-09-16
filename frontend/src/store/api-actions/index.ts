@@ -23,3 +23,4 @@ export * from './training/update-training-action';
 export * from './user/update-user-action';
 export * from './subscribe/subscribe-coach-action';
 export * from './subscribe/unsubscribe-coach-action';
+export * from './booking/create-booking-action';

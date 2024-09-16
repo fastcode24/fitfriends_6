@@ -39,7 +39,6 @@ export const fetchTrainingAction = createAsyncThunk<void, { id: String, role: St
         count
       };
 
-      console.log('fullTraining:', fullTraining);
       dispatch(loadTraining({isLoading: false, data: fullTraining}));
     } catch (error) {
       dispatch(loadTraining({isLoading: false, data: null}));

@@ -1,14 +1,20 @@
 import { useEffect } from "react";
 import { FullUser, Gender, UserRole } from "../../types";
+import { useAppDispatch } from "@/hooks";
+import { createBookingAction } from "@/store/api-actions";
 
 interface UserCardProps {
   user: FullUser;
 }
 
 export function FriendCard({ user }: UserCardProps): JSX.Element {
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  const dispatch = useAppDispatch();
+
+  const handleCreateBooking = () => {
+    if (user.id) {
+      dispatch(createBookingAction({recipientId: user.id}));
+    }
+  }
 
   return (
     <div className="thumbnail-friend">
@@ -42,21 +48,29 @@ export function FriendCard({ user }: UserCardProps): JSX.Element {
             <span>{user.isReady ? 'Готов' : 'Не готов'}{user.gender === Gender.Woman && 'а'} к тренировке</span>
           </div>
           {user.role === UserRole.Customer && user.isReady && (
-            <button className="thumbnail-friend__invite-button" type="button">
+            <button
+              className="thumbnail-friend__invite-button"
+              type="button"
+              title="Пригласить друга на совместную тренировку"
+              onClick={handleCreateBooking}
+            >
               <svg width="43" height="46" aria-hidden="true" focusable="false">
                 <use xlinkHref="#icon-invite"></use>
-              </svg><span className="visually-hidden">Пригласить друга на совместную тренировку</span>
+              </svg>
+              <span className="visually-hidden">Пригласить друга на совместную тренировку</span>
             </button>
           )}
         </div>
       </div>
-      <div className="thumbnail-friend__request-status thumbnail-friend__request-status--role-user">
-        <p className="thumbnail-friend__request-text">Запрос на&nbsp;совместную тренировку</p>
-        <div className="thumbnail-friend__button-wrapper">
-          <button className="btn btn--medium btn--dark-bg thumbnail-friend__button" type="button">Принять</button>
-          <button className="btn btn--medium btn--outlined btn--dark-bg thumbnail-friend__button" type="button">Отклонить</button>
+      {user.role === UserRole.Customer &&
+        <div className="thumbnail-friend__request-status thumbnail-friend__request-status--role-user">
+          <p className="thumbnail-friend__request-text">Запрос на&nbsp;совместную тренировку</p>
+          <div className="thumbnail-friend__button-wrapper">
+            <button className="btn btn--medium btn--dark-bg thumbnail-friend__button" type="button">Принять</button>
+            <button className="btn btn--medium btn--outlined btn--dark-bg thumbnail-friend__button" type="button">Отклонить</button>
+          </div>
         </div>
-      </div>
+      }
     </div>
   );
 }

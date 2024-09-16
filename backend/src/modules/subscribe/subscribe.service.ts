@@ -40,7 +40,7 @@ export class SubscribeService {
 
     const subscribers = await this.getCoachSubscribers(coachId);
 
-    if (subscribers.includes(coachId)) {
+    if (subscribers.includes(userId)) {
       throw new ConflictException('Подписка уже есть');
     }
 
@@ -60,7 +60,7 @@ export class SubscribeService {
 
     const subscribers = await this.getCoachSubscribers(coachId);
 
-    if (!subscribers.includes(coachId)) {
+    if (!subscribers.includes(userId)) {
       throw new ConflictException('У пользователя нет подписки на данного тренера');
     }
 

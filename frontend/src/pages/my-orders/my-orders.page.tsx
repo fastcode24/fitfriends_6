@@ -23,10 +23,6 @@ export function MyOrdersPage(): JSX.Element {
     }
   }, [dispatch, authUser, visibleItems, sortOrder, sortDirection]);
 
-  useEffect(() => {
-    console.log(orders);
-  }, [dispatch, authUser, orders]);
-
   const handleLoadMore = () => {
     setVisibleItems((prev) => prev + DEFAULT_ORDERS_LIMIT);
   };

@@ -20,7 +20,6 @@ export const checkFriendAction = createAsyncThunk<void, { friendId: String }, {
       } else {
         dispatch(setError(String(error)));
       }
-      throw error;
     }
   },
 );

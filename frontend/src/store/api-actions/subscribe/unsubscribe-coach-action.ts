@@ -9,8 +9,8 @@ export const unsubscribeCoachAction = createAsyncThunk<void, { coachId: String }
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/removeFromFriend',
-  async ({ coachId }, { dispatch, extra: api }) => {
+  'data/unsubscribeCoach',
+  async ({ coachId }, { dispatch, extra: api, rejectWithValue }) => {
     try {
       await api.delete(`${APIRoute.Subscribe}/${coachId}`);
     } catch (error) {
@@ -19,7 +19,7 @@ export const unsubscribeCoachAction = createAsyncThunk<void, { coachId: String }
       } else {
         dispatch(setError(String(error)));
       }
-      throw error;
+      return rejectWithValue('An error occurred while subscribing');
     }
   },
 );
