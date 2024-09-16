@@ -6,7 +6,7 @@ import { AppRoute, DEFAULT_ITEMS_LIMIT } from "../../const";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getUsers } from "../../store/selectors";
 import { fetchUsersAction } from "../../store/api-actions";
-import { Level, TrainingType, UserRole, UsersFilterParams } from "../../types";
+import { Level, Metro, TrainingType, UserRole, UsersFilterParams } from "../../types";
 import { capitalizeFirst, removeNullFields } from "../../utils";
 
 export function UsersPage(): JSX.Element {
@@ -15,20 +15,37 @@ export function UsersPage(): JSX.Element {
   const users = usersData?.users || [];
   const totalItems = usersData?.totalItems || 0;
   const [visibleItems, setVisibleItems] = useState<number>(DEFAULT_ITEMS_LIMIT);
-  const VISIBLE_TYPES = 5;
-  const [trainingTypes, setTrainingTypes] = useState(Object.values(TrainingType).slice(0, VISIBLE_TYPES));
+  const VISIBLE_ITEMS = 5;
+  const [trainingTypes, setTrainingTypes] = useState(Object.values(TrainingType).slice(0, VISIBLE_ITEMS));
   const [showTypes, setShowTypes] = useState(false);
+  const [metro, setMetro] = useState(Object.values(Metro).slice(0, VISIBLE_ITEMS));
+  const [showMetro, setShowMetro] = useState(false);
   const [filter, setFilter] = useState<UsersFilterParams>({
     limit: visibleItems,
     trainingType: undefined,
+    metro: undefined,
     level: undefined,
     role: undefined,
   });
 
   useEffect(() => {
+    console.log('users');
+    console.log(users);
+  }, []);
+
+  useEffect(() => {
     const params = removeNullFields<UsersFilterParams>(filter);
     dispatch(fetchUsersAction(params));
   }, [dispatch, filter, visibleItems]);
+
+  const handleShowMetro = () => {
+    setShowMetro(!showMetro);
+    if (showMetro) {
+      setMetro(Object.values(Metro).slice(0, 5));
+      return;
+    }
+    setMetro(Object.values(Metro));
+  };
 
   const handleShowTypes = () => {
     setShowTypes(!showTypes);
@@ -37,6 +54,25 @@ export function UsersPage(): JSX.Element {
       return;
     }
     setTrainingTypes(Object.values(TrainingType));
+  };
+
+  const handleMetroChange = (station: Metro) => {
+    setFilter(prevFilter => {
+      const newMetro = prevFilter.metro ? [...prevFilter.metro] : [];
+      if (newMetro.includes(station)) {
+        return {
+          ...prevFilter,
+          metro: newMetro.filter(t => t !== station),
+          limit: DEFAULT_ITEMS_LIMIT,
+        };
+      } else {
+        return {
+          ...prevFilter,
+          metro: [...newMetro, station],
+          limit: DEFAULT_ITEMS_LIMIT,
+        };
+      }
+    });
   };
 
   const handleTrainingTypesChange = (type: TrainingType) => {
@@ -105,78 +141,36 @@ export function UsersPage(): JSX.Element {
                     <div className="user-catalog-form__block user-catalog-form__block--location">
                       <h4 className="user-catalog-form__block-title">Локация, станция метро</h4>
                       <ul className="user-catalog-form__check-list">
-                        <li className="user-catalog-form__check-list-item">
-                          <div className="custom-toggle custom-toggle--checkbox">
-                            <label>
-                              <input type="checkbox" value="user-agreement-1" name="user-agreement" checked />
-                              <span className="custom-toggle__icon">
-                                <svg width="9" height="6" aria-hidden="true">
-                                  <use xlinkHref="#arrow-check"></use>
-                                </svg>
-                              </span>
-                              <span className="custom-toggle__label">Автово</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li className="user-catalog-form__check-list-item">
-                          <div className="custom-toggle custom-toggle--checkbox">
-                            <label>
-                              <input type="checkbox" value="user-agreement-1" name="user-agreement" checked />
-                              <span className="custom-toggle__icon">
-                                <svg width="9" height="6" aria-hidden="true">
-                                  <use xlinkHref="#arrow-check"></use>
-                                </svg>
-                              </span>
-                              <span className="custom-toggle__label">Адмиралтейская</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li className="user-catalog-form__check-list-item">
-                          <div className="custom-toggle custom-toggle--checkbox">
-                            <label>
-                              <input type="checkbox" value="user-agreement-1" name="user-agreement" checked />
-                              <span className="custom-toggle__icon">
-                                <svg width="9" height="6" aria-hidden="true">
-                                  <use xlinkHref="#arrow-check"></use>
-                                </svg>
-                              </span>
-                              <span className="custom-toggle__label">Академическая</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li className="user-catalog-form__check-list-item">
-                          <div className="custom-toggle custom-toggle--checkbox">
-                            <label>
-                              <input type="checkbox" value="user-agreement-1" name="user-agreement" />
-                              <span className="custom-toggle__icon">
-                                <svg width="9" height="6" aria-hidden="true">
-                                  <use xlinkHref="#arrow-check"></use>
-                                </svg>
-                              </span>
-                              <span className="custom-toggle__label">Балтийская</span>
-                            </label>
-                          </div>
-                        </li>
-                        <li className="user-catalog-form__check-list-item">
-                          <div className="custom-toggle custom-toggle--checkbox">
-                            <label>
-                              <input type="checkbox" value="user-agreement-1" name="user-agreement" />
-                              <span className="custom-toggle__icon">
-                                <svg width="9" height="6" aria-hidden="true">
-                                  <use xlinkHref="#arrow-check"></use>
-                                </svg>
-                              </span>
-                              <span className="custom-toggle__label">Бухарестская</span>
-                            </label>
-                          </div>
-                        </li>
+                        {metro.map((station) => (
+                          <li key={station} className="user-catalog-form__check-list-item">
+                            <div className="custom-toggle custom-toggle--checkbox">
+                              <label>
+                                <input
+                                  type="checkbox"
+                                  value={station}
+                                  name={station}
+                                  checked={filter.metro?.includes(station) || false}
+                                  onChange={() => handleMetroChange(station)}
+                                />
+                                <span className="custom-toggle__icon">
+                                  <svg width="9" height="6" aria-hidden="true">
+                                    <use xlinkHref="#arrow-check"></use>
+                                  </svg>
+                                </span>
+                                <span className="custom-toggle__label">{station}</span>
+                              </label>
+                            </div>
+                          </li>
+                        ))}
                       </ul>
-                      <button className="btn-show-more user-catalog-form__btn-show" type="button">
-                        <span>Посмотреть все</span>
-                        <svg className="btn-show-more__icon" width="10" height="4" aria-hidden="true">
-                          <use xlinkHref="#arrow-down"></use>
-                        </svg>
-                      </button>
+                      {!showMetro && metro.length > VISIBLE_ITEMS &&
+                        <button onClick={handleShowMetro} className="btn-show-more user-catalog-form__btn-show" type="button">
+                          <span>Посмотреть все</span>
+                          <svg className="btn-show-more__icon" width="10" height="4" aria-hidden="true">
+                            <use xlinkHref="#arrow-down"></use>
+                          </svg>
+                        </button>
+                      }
                     </div>
                     <div className="user-catalog-form__block user-catalog-form__block--spezialization">
                       <h4 className="user-catalog-form__block-title">Специализация</h4>
@@ -216,7 +210,7 @@ export function UsersPage(): JSX.Element {
                       <h4 className="user-catalog-form__block-title">Уровень</h4>
                       <div className="custom-toggle-radio">
                         {Object.values(Level).map((level) => (
-                          <div className="custom-toggle-radio__block">
+                          <div key={level} className="custom-toggle-radio__block">
                             <label>
                               <input
                                 type="radio"

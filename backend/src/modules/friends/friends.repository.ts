@@ -132,6 +132,33 @@ export class FriendsRepository extends BasePostgresRepository<UserEntity> {
       message: `Пользователь c id ${friendId} успешно удален из друзей`,
     }
   }
+
+  public async isFriend(currentUserId: string, friendId: string): Promise<boolean> {
+
+    if (currentUserId === friendId) {
+      return false;
+    }
+
+    const currentUser = await this.client.user.findUnique({
+      where: { id: currentUserId },
+      select: { friends: true },
+    });
+
+    const friendUser = await this.client.user.findUnique({
+      where: { id: friendId },
+      select: { friends: true },
+    });
+
+    if (!currentUser || !friendUser) {
+      throw new NotFoundException('Один из пользователей не найден');
+    }
+
+    if (currentUser.friends.includes(friendId)) {
+      return true;
+    }
+
+    return false;
+  }
 }
 
 

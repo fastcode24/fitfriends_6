@@ -1,4 +1,4 @@
-import { IsBoolean, IsEnum, IsIn, IsOptional } from 'class-validator';
+import { IsArray, IsBoolean, IsEnum, IsIn, IsOptional } from 'class-validator';
 import { Transform } from 'class-transformer';
 import * as lodash from 'lodash';
 import { Metro, Level, UserRole, TrainingType } from 'src/libs//types';
@@ -15,14 +15,15 @@ export class UsersQuery extends BaseQuery {
   @IsOptional()
   public trainingType?: TrainingType[];
 
-  @ApiPropertyOptional({ description: 'Станция метро', enum: Metro, enumName: 'Metro' })
+  @ApiPropertyOptional({ description: 'Станции метро', enum: Metro, enumName: 'Metro', isArray: true })
   @Transform(({ value }) => {
     const locations = typeof value === 'string' ? [value] : value;
     return locations.map((item: string) => lodash.capitalize(item));
   })
+  @IsArray()
   @IsIn(Object.values(Metro), { each: true })
   @IsOptional()
-  public metro?: Metro;
+  public metro?: Metro[];
 
   @ApiPropertyOptional({ description: 'Уровень подготовки', enum: Level, enumName: 'Level' })
   @Transform(({ value }) => lodash.lowerCase(value))

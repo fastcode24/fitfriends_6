@@ -35,7 +35,13 @@ export function FeaturedTrainingsList({ featuredTrainings }: FeaturedTrainingsLi
               <aside className="promo-slider">
                 <div className="promo-slider__overlay"></div>
                 <div className="promo-slider__image">
-                  <img src={training.background} srcSet={`${training.background} 2x`} width="1040" height="469" alt="promo-photo" />
+                  <img
+                    src={training.background}
+                    srcSet={`${training.background} 2x`}
+                    width="1040"
+                    height="469"
+                    alt="promo-photo"
+                  />
                 </div>
                 <div className="promo-slider__header">
                   <Link to={`${AppRoute.TrainingUrl}/${training.id}`}>
@@ -47,12 +53,19 @@ export function FeaturedTrainingsList({ featuredTrainings }: FeaturedTrainingsLi
                     </svg>
                   </div>
                 </div>
-                <Link to={`${AppRoute.TrainingUrl}/${training.id}`}><span className="promo-slider__text">Горячие предложения на тренировки на {training.trainingType}</span></Link>
+                <Link to={`${AppRoute.TrainingUrl}/${training.id}`}>
+                  <span className="promo-slider__text">Горячие предложения на тренировки на {training.trainingType}</span>
+                </Link>
                 <div className="promo-slider__bottom-container">
                   <div className="promo-slider__slider-dots">
-                    <button onClick={() => handleDotClick(0)} className={`promo-slider__slider-dot ${activeSlide === 0 ? 'promo-slider__slider-dot--active' : ''}`} aria-label="первый слайд"></button>
-                    <button onClick={() => handleDotClick(1)} className={`promo-slider__slider-dot ${activeSlide === 1 ? 'promo-slider__slider-dot--active' : ''}`} aria-label="второй слайд"></button>
-                    <button onClick={() => handleDotClick(2)} className={`promo-slider__slider-dot ${activeSlide === 2 ? 'promo-slider__slider-dot--active' : ''}`} aria-label="третий слайд"></button>
+                    {featuredTrainings.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handleDotClick(index)}
+                        className={`promo-slider__slider-dot ${activeSlide === index ? 'promo-slider__slider-dot--active' : ''}`}
+                        aria-label={`слайд ${index + 1}`}
+                      />
+                    ))}
                   </div>
                   <div className="promo-slider__price-container">
                     <p className="promo-slider__price">{training.price} ₽</p>

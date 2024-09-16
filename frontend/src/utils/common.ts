@@ -8,7 +8,7 @@ export const removeNullFields = <T extends object>(obj: T): T => {
   const newObj = {} as T;
   Object.keys(obj).forEach((key) => {
     const value = obj[key as keyof T];
-    if (value !== null && value !== undefined) {
+    if (value !== null && value !== undefined && (!Array.isArray(value) || value.length > 0)) {
       newObj[key as keyof T] = value;
     }
   });

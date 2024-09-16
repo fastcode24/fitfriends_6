@@ -5,6 +5,11 @@ export type LoadUsersPayload = {
   data: Users | null;
 };
 
+export type CheckFriendPayload = {
+  isLoading: boolean;
+  data: { isFriend: boolean } | null;
+};
+
 export type LoadTrainingPayload = {
   isLoading: boolean;
   data: FullTraining | null;

@@ -1,11 +1,11 @@
-import { Controller, Get, Post, Body, HttpStatus, Query, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, HttpStatus, Query, Req, Param } from '@nestjs/common';
 import { FriendsService } from './friends.service';
 import { ApiTags, ApiResponse, ApiBody, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { BaseQuery } from 'src/libs/query/base-query';
 import { UsersRdo, UsersRdoExample } from 'src/modules/user/rdo';
-import { UserDtoValidationPipe } from 'src/libs/pipes';
+import { UserDtoValidationPipe, UUIDValidationPipe } from 'src/libs/pipes';
 import { UpdateFriendsDto } from './dto';
-import { UpdateFriendsRdo } from './rdo';
+import { IsFriendRdo, UpdateFriendsRdo } from './rdo';
 import { RequestWithTokenPayload } from 'src/libs/requests';
 
 @ApiTags('Друзья')
@@ -66,5 +66,22 @@ export class FriendsController {
     @Body(new UserDtoValidationPipe(UpdateFriendsDto)) dto: UpdateFriendsDto
   ) {
     return this.friendsService.removeFriend(tokenPayload.sub, dto);
+  }
+
+  @ApiOperation({
+    summary: 'Узнать является ли пользователь другом'
+  })
+  @ApiResponse({
+    type: Boolean,
+    status: HttpStatus.OK,
+    description: 'Друг или нет',
+  })
+  @ApiBearerAuth('access-token')
+  @Get('/:id')
+  public async checkFriend(
+    @Req() { tokenPayload }: RequestWithTokenPayload,
+    @Param('id', UUIDValidationPipe) id: string
+  ): Promise<IsFriendRdo> {
+    return await this.friendsService.checkFriendship(tokenPayload.sub, id);
   }
 }

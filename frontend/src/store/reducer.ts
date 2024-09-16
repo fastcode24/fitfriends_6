@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { loadUsers, requireAuthorization, setError, setAuthUser, loadUser, clearUserData, loadRelatedTrainings, loadFeaturedTrainings, loadPopularTrainings, loadTraining, loadReview, loadFriends, loadBalance, loadNotify, setActiveTraining, loadOrders, loadCatalogTrainings } from './action';
+import { loadUsers, requireAuthorization, setError, setAuthUser, loadUser, clearUserData, loadRelatedTrainings, loadFeaturedTrainings, loadPopularTrainings, loadTraining, loadReview, loadFriends, loadBalance, loadNotify, setActiveTraining, loadOrders, loadCatalogTrainings, checkFriends } from './action';
 import { UserRole, InitialState } from '@types';
 import { AuthorizationStatus } from '@/const';
 
@@ -9,6 +9,10 @@ const initialState: InitialState = {
     data: null,
   },
   friends: {
+    isLoading: false,
+    data: null,
+  },
+  isFriend: {
     isLoading: false,
     data: null,
   },
@@ -69,6 +73,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadFriends, (state, action) => {
       state.friends = action.payload;
+    })
+    .addCase(checkFriends, (state, action) => {
+      state.isFriend = action.payload;
     })
     .addCase(loadUser, (state, action) => {
       state.user = action.payload;

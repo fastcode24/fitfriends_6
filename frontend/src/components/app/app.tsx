@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { AccountCustomerPage, IntroPage, LoginPage, MainPage, MyPurchasesPage, TrainingsPage, NotFoundPage, QuestionnaireCustomerPage, RegisterPage, TrainingPage, QuestionnaireCoachPage, AccountCoachPage, CreateTrainingPage, UsersPage, MyOrdersPage, UserPage } from '@pages';
+import { AccountCustomerPage, IntroPage, LoginPage, MainPage, MyPurchasesPage, TrainingsPage, NotFoundPage, QuestionnaireCustomerPage, RegisterPage, TrainingPage, QuestionnaireCoachPage, AccountCoachPage, CreateTrainingPage, UsersPage, MyOrdersPage, UserPage, FriendsPage } from '@pages';
 import { Logout } from '@components';
 import { getAuthorizationStatus, getAuthUser, getError } from '@store/selectors';
 import { checkAuthAction } from '@store/api-actions';
@@ -46,6 +46,7 @@ export function App(): JSX.Element {
               <Route path={AppRoute.Users} element={<Navigate to={AppRoute.AccountCoach} />} />
               <Route path={AppRoute.UserPage} element={<UserPage />} />
               <Route path={AppRoute.CreateTraining} element={<CreateTrainingPage />} />
+              <Route path={AppRoute.Friends} element={<FriendsPage />} />
               <Route path={AppRoute.Orders} element={<MyOrdersPage />} />
               <Route path={AppRoute.Purchases} element={<Navigate to={AppRoute.AccountCoach} />} />
               <Route path={AppRoute.Logout} element={<Logout />} />
@@ -66,6 +67,7 @@ export function App(): JSX.Element {
               <Route path={AppRoute.Users} element={<UsersPage />} />
               <Route path={AppRoute.UserPage} element={<UserPage />} />
               <Route path={AppRoute.CreateTraining} element={<Navigate to={AppRoute.Main} replace />} />
+              <Route path={AppRoute.Friends} element={<FriendsPage />} />
               <Route path={AppRoute.Orders} element={<Navigate to={AppRoute.Main} replace />} />
               <Route path={AppRoute.Purchases} element={<MyPurchasesPage />} />
               <Route path={AppRoute.Logout} element={<Logout />} />
@@ -87,6 +89,7 @@ export function App(): JSX.Element {
             <Route path={AppRoute.Users} element={<Navigate to={AppRoute.Intro} replace />} />
             <Route path={AppRoute.UserPage} element={<Navigate to={AppRoute.Intro} replace />} />
             <Route path={AppRoute.CreateTraining} element={<Navigate to={AppRoute.Intro} replace />} />
+            <Route path={AppRoute.Friends} element={<Navigate to={AppRoute.Intro} replace />} />
             <Route path={AppRoute.Orders} element={<Navigate to={AppRoute.Intro} replace />} />
             <Route path={AppRoute.Purchases} element={<Navigate to={AppRoute.Intro} replace />} />
             <Route path={AppRoute.Logout} element={<Logout />} />

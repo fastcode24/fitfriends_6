@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { FullUser, Gender, UserRole } from "../../types";
 
 interface UserCardProps {
@@ -5,6 +6,10 @@ interface UserCardProps {
 }
 
 export function FriendCard({ user }: UserCardProps): JSX.Element {
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <div className="thumbnail-friend">
       <div className={`thumbnail-friend__info ${user.role === UserRole.Coach ? 'thumbnail-friend__info--theme-dark' : 'thumbnail-friend__info--theme-light'}`}>

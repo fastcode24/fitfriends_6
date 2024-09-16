@@ -1,12 +1,11 @@
 import { Helmet } from "react-helmet-async";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { getFeaturedTrainings, getPopularTrainings, getRelatedTrainings, getUser } from "../../store/selectors";
-import { Gender, SortType, Training, UserRole } from "../../types";
+import { getFeaturedTrainings, getPopularTrainings, getRelatedTrainings, getUser, getUsers } from "../../store/selectors";
+import { FullUser, Gender, SortType, Training, UserRole } from "../../types";
 import { useEffect } from "react";
 import { fetchTrainingsAction, fetchUsersAction } from "../../store/api-actions";
-import { Header, FeaturedTrainingsList, PopularTrainingsList, RelatedTrainingsList } from "../../components";
+import { Header, FeaturedTrainingsList, PopularTrainingsList, RelatedTrainingsList, ReadyUsersList } from "../../components";
 import { AppTitle } from "../../const";
-//import { ReadyUsersList } from "@/components/main/ready-users-list";
 
 export function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -14,18 +13,19 @@ export function MainPage(): JSX.Element {
   const relatedData = useAppSelector((getRelatedTrainings));
   const featuredData = useAppSelector((getFeaturedTrainings));
   const popularData = useAppSelector((getPopularTrainings));
-  //const usersData = useAppSelector((getUsers));
+  const usersData = useAppSelector((getUsers));
   const relatedTrainings: Training[] = relatedData?.trainings || [];
   const featuredTrainings: Training[] = featuredData?.trainings || [];
   const popularTrainings: Training[] = popularData?.trainings || [];
-  //const readyUsers: FullUser[] = usersData?.users || [];
+  const readyUsers: FullUser[] = usersData?.users || [];
   const RELATED_ITEMS = 9;
   const FEATURED_ITEMS = 3;
   const POPULAR_ITEMS = 8;
   const USERS_ITEMS = 8
 
   useEffect(() => {
-    console.log('Main Page loaded');
+    console.log('featuredTrainings');
+    console.log('featuredTrainings', featuredTrainings);
   }, []);
 
   useEffect(() => {
@@ -62,9 +62,9 @@ export function MainPage(): JSX.Element {
         {popularTrainings && popularTrainings.length > 0 && (
           <PopularTrainingsList popularTrainings={popularTrainings} />
         )}
-        {/*readyUsers && readyUsers.length > 0 && (
+        {readyUsers && readyUsers.length > 0 && (
           <ReadyUsersList readyUsers={readyUsers} />
-        )*/}
+        )}
       </main>
     </div>
   );

@@ -10,6 +10,8 @@ export const getUsers = (state: State) => state.allUsers.data;
 
 export const getFriends = (state: State) => state.friends.data;
 
+export const getFriendsStatus = (state: State) => state.isFriend.data;
+
 export const getTraining = (state: State) => state.training.data;
 
 export const getReview = (state: State) => state.review.data;

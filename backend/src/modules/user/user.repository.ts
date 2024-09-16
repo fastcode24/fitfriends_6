@@ -32,8 +32,10 @@ export class UserRepository extends BasePostgresRepository<UserEntity> {
       };
     }
 
-    if (query?.metro) {
-      whereClause.metro = query.metro;
+    if (query?.metro && query.metro.length > 0) {
+      whereClause.metro = {
+        in: query.metro,
+      };
     }
 
     if (query?.level) {

@@ -10,6 +10,10 @@ export type InitialState = {
     isLoading: boolean;
     data: Users | null;
   };
+  isFriend: {
+    isLoading: boolean;
+    data: { isFriend: boolean } | null;
+  };
   user: {
     isLoading: boolean;
     data: FullUser | null;

@@ -1,3 +1,5 @@
+import { Metro } from "@types";
+
 export const BACKEND_URL = 'http://localhost:3000';
 
 export const REQUEST_TIMEOUT = 5000;
@@ -5,7 +7,7 @@ export const TIMEOUT_SHOW_ERROR = 2000;
 export const MESSAGE_SHORT_TIMEOUT = 750;
 export const MESSAGE_LONG_TIMEOUT = 750;
 
-export const DEFAULT_ITEMS_LIMIT = 3; //TODO поставить 6
+export const DEFAULT_ITEMS_LIMIT = 6;
 export const DEFAULT_ORDERS_LIMIT = 4;
 
 export const FEATURED_DISCOUNT = 0.9;
@@ -30,9 +32,12 @@ export enum APIRoute {
   Review = '/api/review',
   Notify = '/api/notify',
   Friends = '/api/friends',
+  Subscribe = '/api/subscribe',
   Balance = '/api/balance',
   Orders = '/api/orders',
   AddFriend = '/api/friends/add',
+  RemoveFriend = '/api/friends/remove',
+  Friend = '/api/friends',
   FileUpload = '/api/upload/file',
 }
 
@@ -80,3 +85,11 @@ export enum AppTitle {
   Purchases = '/my-purchases',
   ReviewsHash = 'reviews'
 }
+
+export const metroCoordinates: Record<Metro, { latitude: number, longitude: number }> = {
+  [Metro.Pionerskaya]: { latitude: 60.0025, longitude: 30.2966 },
+  [Metro.Petrogradskaya]: { latitude: 59.9661, longitude: 30.3117 },
+  [Metro.Udelnaya]: { latitude: 60.01667, longitude: 30.31556 },
+  [Metro.Zvezdnaya]: { latitude: 59.8331, longitude: 30.3494 },
+  [Metro.Sportivnaya]: { latitude: 59.9503, longitude: 30.2881 },
+};

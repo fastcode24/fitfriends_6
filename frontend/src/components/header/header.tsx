@@ -28,10 +28,6 @@ export function Header(): JSX.Element {
     dispatch(fetchNotifyAction());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log(notify);
-  }, [notify]);
-
   const handleNotifyClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event.preventDefault();
     dispatch(fetchNotifyAction());
@@ -62,16 +58,11 @@ export function Header(): JSX.Element {
             </Link>
           </li>
           <li className="main-nav__item">
-            {/*<Link to={AppRoute.Friends} className={`main-nav__link ${isActiveFriends ? 'is-active' : ''}`} aria-label="Друзья">
+            <Link to={AppRoute.Friends} className={`main-nav__link ${isActiveFriends ? 'is-active' : ''}`} aria-label="Друзья">
               <svg width="22" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-friends"></use>
               </svg>
-            </Link>*/}
-            <span className={`main-nav__link ${isActiveFriends ? 'is-active' : ''}`} aria-label="Друзья">
-              <svg width="22" height="16" aria-hidden="true">
-                <use xlinkHref="#icon-friends"></use>
-              </svg>
-            </span>
+            </Link>
           </li>
           <li className="main-nav__item main-nav__item--notifications">
             <a className="main-nav__link" href="#" aria-label="Уведомления" onClick={handleNotifyClick}>

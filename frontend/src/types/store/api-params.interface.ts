@@ -26,7 +26,7 @@ export interface FriendsParams extends BaseFetchParams {
 export interface UsersFilterParams extends BaseFetchParams {
   sort?: SortDirection;
   trainingType?: TrainingType[];
-  metro?: Metro;
+  metro?: Metro[];
   level?: Level;
   role?: UserRole;
   isReady?: boolean;
